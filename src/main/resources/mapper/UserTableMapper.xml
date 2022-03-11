@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.tsinsi.fumble.mapper.UserMapper">
+
+    <resultMap id="UserMap" type="com.tsinsi.fumble.entity.User">
+        <id property="name" column="name"/>
+        <result property="id.value" column="id"/>
+    </resultMap>
+
+    <select id="findById" resultMap="UserMap">
+        select id, name
+        from tb_user
+        where id = #{id}
+    </select>
+</mapper>

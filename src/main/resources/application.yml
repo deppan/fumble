@@ -1,0 +1,25 @@
+server:
+  port: 9999
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    hikari:
+      jdbc-url: jdbc:mysql://127.0.0.1:3306/db_study?useUnicode=true&characterEncoding=UTF-8&useSSL=false&allowMultiQueries=true
+      username: deppan
+      password: dbforstudy
+      connection-timeout: 30000
+      idle-timeout: 600000
+      max-lifetime: 1800000
+
+mybatis:
+  mapper-locations:
+    - classpath:mapper/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+
+yml:
+  header: "Authorization"
+  headerName: "Bearer"
+  secret: "ZFLdw7@4H%*n"
+  expiration: 10
