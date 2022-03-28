@@ -5,7 +5,7 @@ spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     hikari:
-      jdbc-url: jdbc:mysql://127.0.0.1:3306/db_study?useUnicode=true&characterEncoding=UTF-8&useSSL=false&allowMultiQueries=true
+      jdbc-url: jdbc:mysql://127.0.0.1:3306/db_study?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&allowPublicKeyRetrieval=true&useSSL=false
       username: deppan
       password: dbforstudy
       connection-timeout: 30000
@@ -18,7 +18,7 @@ mybatis:
   configuration:
     map-underscore-to-camel-case: true
 
-yml:
+jwt:
   header: "Authorization"
   headerName: "Bearer"
   secret: "ZFLdw7@4H%*n"

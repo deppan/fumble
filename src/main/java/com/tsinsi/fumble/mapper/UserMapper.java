@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Select;
 
 @Mapper
 public interface UserMapper {
+
     User findById(Long id);
 
     @Results({

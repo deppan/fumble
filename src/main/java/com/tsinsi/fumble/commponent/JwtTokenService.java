@@ -12,7 +12,6 @@ public class JwtTokenService {
     @Value("${jwt.expiration}")
     private int expiration;
 
-
     public boolean validateToken(String token) {
         return false;
     }

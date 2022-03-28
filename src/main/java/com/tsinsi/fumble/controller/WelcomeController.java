@@ -25,4 +25,14 @@ public class WelcomeController {
         log.info(user.getId().getValue() + " " + user.getName());
         return Map.of("name", "springboot");
     }
+
+    @GetMapping("/home")
+    public Object home() {
+        return Map.of("name", "home");
+    }
+
+    @GetMapping("/user")
+    public Object user() {
+        return Map.of("name", "user");
+    }
 }
