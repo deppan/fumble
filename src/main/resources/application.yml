@@ -19,7 +19,5 @@ mybatis:
     map-underscore-to-camel-case: true
 
 jwt:
-  header: "Authorization"
-  headerName: "Bearer"
   secret: "ZFLdw7@4H%*n"
   expiration: 10

@@ -16,7 +16,7 @@ public class SecurityConfiguration {
 
     @Bean
     public SecurityFilterChain filterChain(@NonNull HttpSecurity http) throws Exception {
-        http.authorizeRequests((authorize) -> authorize.antMatchers("/index").permitAll().anyRequest().authenticated())
+        http.authorizeRequests((authorize) -> authorize.antMatchers("/", "/index").permitAll().anyRequest().authenticated())
                 .httpBasic(withDefaults());
         return http.build();
     }

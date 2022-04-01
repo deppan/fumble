@@ -5,6 +5,7 @@ import com.tsinsi.fumble.mapper.UserMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
@@ -16,8 +17,8 @@ public class WelcomeController {
     @Autowired
     private UserMapper userMapper;
 
-    @GetMapping("/index")
-    public Object index() {
+    @GetMapping(value = {"/", "/index"})
+    public Object index(@RequestParam(value = "index") String index) {
         User user = userMapper.findById(1L);
         log.info(user.getId().getValue() + " " + user.getName());
 
