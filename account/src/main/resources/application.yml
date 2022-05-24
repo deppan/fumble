@@ -1,0 +1,34 @@
+server:
+  port: 9999
+
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: id
+            client-secret: secret
+            scope:
+              - email
+              - profile
+          facebook:
+            client-id: id
+            client-secret: secret
+            scope:
+              - email
+              - public_profile
+
+mybatis:
+  mapper-locations:
+    - classpath:mapper/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+
+whitelist:
+  paths:
+    - /
+    - /index
+
+hashids:
+  salt: J5%pN84xi5MZ

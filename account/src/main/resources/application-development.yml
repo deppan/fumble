@@ -1,0 +1,51 @@
+spring:
+  datasource:
+    writer:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      username: writer
+      password: dbforstudy
+      jdbc-url: jdbc:mysql://127.0.0.1:3306/db_study?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&allowPublicKeyRetrieval=true&useSSL=false
+      connection-timeout: 30000
+      idle-timeout: 600000
+      max-lifetime: 1800000
+      maximum-pool-size: 10
+      minimum-idle: 5
+    reader:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      username: writer
+      password: dbforstudy
+      jdbc-url: jdbc:mysql://127.0.0.1:3306/db_study?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&allowPublicKeyRetrieval=true&useSSL=false
+      connection-timeout: 30000
+      idle-timeout: 600000
+      max-lifetime: 1800000
+      maximum-pool-size: 10
+      minimum-idle: 5
+
+  devtools:
+    add-properties: false
+
+  redis:
+    port: 6379
+    password: FlM34FN&peIc
+    host: 127.0.0.1
+    timeout: 10
+    lettuce:
+      cluster:
+        refresh:
+          adaptive: true
+          period: 20
+      pool:
+        max-active: 8
+        max-wait: -1
+        max-idle: 8
+        min-idle: 4
+
+mybatis:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+logging:
+  level:
+    com.tsinsi.fumble.account: DEBUG
+    com.zaxxer.hikari: DEBUG
+    web: DEBUG

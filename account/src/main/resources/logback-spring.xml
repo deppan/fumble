@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <include resource="org/springframework/boot/logging/logback/base.xml"/>
+
+    <springProfile name="development">
+        <appender name="account" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <file>./account.log</file>
+            <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+                <fileNamePattern>./%d{yyyy-MM, aux}/activity.%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+                <maxFileSize>150MB</maxFileSize>
+                <maxHistory>30</maxHistory>
+            </rollingPolicy>
+            <encoder>
+                <pattern>%date [%thread] %-5level [%logger{50}] %file:%line - %msg%n</pattern>
+                <charset>UTF-8</charset>
+            </encoder>
+        </appender>
+
+        <logger name="account" level="DEBUG">
+            <appender-ref ref="account"/>
+        </logger>
+    </springProfile>
+
+</configuration>
