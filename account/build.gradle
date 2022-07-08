@@ -1,18 +1,44 @@
 plugins {
-    id 'org.springframework.boot' version '3.0.0-M3'
     id 'java'
+    id 'org.springframework.boot' version '3.0.0-M3'
+    id 'org.asciidoctor.jvm.convert' version '3.3.2'
 }
 
 group 'com.tsinsi.fumble.account'
 version '0.0.1-SNAPSHOT'
 
+ext {
+    restdocsVersion = '3.0.0-SNAPSHOT'
+    snippetsDir = file('build/generated-snippets')
+}
+
+configurations {
+    asciidoctorExtensions
+}
+
 test {
     useTestNG()
+    outputs.dir snippetsDir
 }
 
 dependencies {
+    asciidoctorExtensions "org.springframework.restdocs:spring-restdocs-asciidoctor:$restdocsVersion"
+
     implementation 'com.nimbusds:nimbus-jose-jwt:9.23'
     implementation 'org.hashids:hashids:1.0.3'
     implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
+}
+
+asciidoctor {
+    configurations "asciidoctorExtensions"
+    inputs.dir snippetsDir
+    dependsOn test
+}
+
+jar {
+    dependsOn asciidoctor
+    from("${asciidoctor.outputDir}") {
+        into 'static/docs'
+    }
 }
