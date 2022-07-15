@@ -7,7 +7,7 @@
         <id property="username" column="username"/>
         <id property="password" column="password"/>
         <id property="gender" column="gender"/>
-        <result property="id.value" column="id"/>
+        <id property="id" column="id"/>
     </resultMap>
 
     <select id="findById" resultMap="UserMap">

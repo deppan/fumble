@@ -14,9 +14,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.lang.reflect.Method;
-import java.time.LocalDate;
-import java.time.Period;
-import java.time.format.DateTimeFormatter;
 
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.documentationConfiguration;
@@ -50,26 +47,11 @@ public class AccountApplicationTests extends AbstractTestNGSpringContextTests {
 
     @Test
     public void index() throws Exception {
-        RequestParametersSnippet request = requestParameters(parameterWithName("index").description(""));
-        ResponseFieldsSnippet response = responseFields(fieldWithPath("name").description("The page name"));
-        mockMvc.perform(get("/index"))
+        RequestParametersSnippet request = requestParameters(parameterWithName("index").optional().description("aaa"));
+        ResponseFieldsSnippet response = responseFields(fieldWithPath("username").description("The page name"));
+        mockMvc.perform(get("/index").param("index", "index"))
                 .andExpect(status().isOk())
                 .andDo(document("account", request, response))
         ;
-    }
-
-    @Test
-    public void test() {
-        String date = "2022-12-21";
-        LocalDate localDateTime = LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-M-dd"));
-        System.out.println(localDateTime);
-
-        LocalDate now = LocalDate.now();
-        LocalDate localDate = LocalDate.of(2022, 12, 31);
-        Period period = Period.between(now, localDate);
-        System.out.println(period.getYears());
-        System.out.println(period.getMonths());
-        System.out.println(period.getDays());
-        System.out.println(localDate.toEpochDay() - now.toEpochDay());
     }
 }

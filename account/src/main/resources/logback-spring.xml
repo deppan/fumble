@@ -3,7 +3,7 @@
 
     <include resource="org/springframework/boot/logging/logback/base.xml"/>
 
-    <springProfile name="development">
+    <springProfile name="production">
         <appender name="account" class="ch.qos.logback.core.rolling.RollingFileAppender">
             <file>./account.log</file>
             <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">

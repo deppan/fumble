@@ -12,7 +12,7 @@ spring:
       minimum-idle: 5
     reader:
       driver-class-name: com.mysql.cj.jdbc.Driver
-      username: writer
+      username: reader
       password: dbforstudy
       jdbc-url: jdbc:mysql://127.0.0.1:3306/db_study?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&allowPublicKeyRetrieval=true&useSSL=false
       connection-timeout: 30000

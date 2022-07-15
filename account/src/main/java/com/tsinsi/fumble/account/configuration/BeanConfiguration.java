@@ -28,8 +28,7 @@ public class BeanConfiguration {
     public UserDetailsService userDetailsService(AccountRepository repository) {
         return username -> {
             Account account = repository.findByUsername(username);
-            return User.withUsername(String.valueOf(account.getId().getValue()))
-                    .password(account.getPassword())
+            return User.withUsername(String.valueOf(account.getId()))
                     .authorities(Collections.emptyList())
                     .accountExpired(false)
                     .accountLocked(false)
