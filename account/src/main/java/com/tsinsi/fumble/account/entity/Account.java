@@ -10,5 +10,6 @@ public class Account extends Entity {
     @JsonIgnore
     private String password;
     private String username;
+    private String nickname;
     private int gender;
 }

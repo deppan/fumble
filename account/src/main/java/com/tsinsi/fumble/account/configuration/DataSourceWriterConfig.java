@@ -17,7 +17,7 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import javax.sql.DataSource;
 
 @Configuration(proxyBeanMethods = false)
-@MapperScan(basePackages = "com.tsinsi.fumble.account.mapper.writer", sqlSessionTemplateRef = "writerSqlSessionTemplate")
+@MapperScan(basePackages = "com.tsinsi.fumble.account.adapter.out.mapper.writer", sqlSessionTemplateRef = "writerSqlSessionTemplate")
 public class DataSourceWriterConfig {
 
     @Primary

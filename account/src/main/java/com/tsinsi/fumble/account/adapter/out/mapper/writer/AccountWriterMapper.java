@@ -1,4 +1,4 @@
-package com.tsinsi.fumble.account.mapper.writer;
+package com.tsinsi.fumble.account.adapter.out.mapper.writer;
 
 import com.tsinsi.fumble.account.entity.Account;
 import org.apache.ibatis.annotations.*;

@@ -26,7 +26,8 @@ mybatis:
 whitelist:
   paths:
     - /
-    - /index
+    - /accounts
+    - /account/*
 
 hashids:
   salt: J5%pN84xi5MZ

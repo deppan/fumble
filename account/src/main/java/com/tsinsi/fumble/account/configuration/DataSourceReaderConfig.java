@@ -16,7 +16,7 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import javax.sql.DataSource;
 
 @Configuration(proxyBeanMethods = false)
-@MapperScan(basePackages = "com.tsinsi.fumble.account.mapper.reader", sqlSessionTemplateRef = "readerSqlSessionTemplate")
+@MapperScan(basePackages = "com.tsinsi.fumble.account.adapter.out.mapper.reader", sqlSessionTemplateRef = "readerSqlSessionTemplate")
 public class DataSourceReaderConfig {
 
     @Bean(name = "readerDataSource")

@@ -1,7 +1,7 @@
 package com.tsinsi.fumble.account.configuration;
 
 import com.tsinsi.fumble.account.entity.Account;
-import com.tsinsi.fumble.account.mapper.AccountRepository;
+import com.tsinsi.fumble.account.adapter.out.mapper.AccountRepository;
 import org.hashids.Hashids;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
