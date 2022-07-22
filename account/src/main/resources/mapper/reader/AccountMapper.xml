@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
-<mapper namespace="com.tsinsi.fumble.account.adapter.out.mapper.reader.AccountReaderMapper">
+<mapper namespace="com.tsinsi.account.adapter.out.mapper.reader.AccountReaderMapper">
 
-    <resultMap id="UserMap" type="com.tsinsi.fumble.account.entity.Account">
+    <resultMap id="UserMap" type="com.tsinsi.account.entity.Account">
         <id property="username" column="username"/>
         <id property="password" column="password"/>
         <id property="gender" column="gender"/>

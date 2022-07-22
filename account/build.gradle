@@ -4,8 +4,9 @@ plugins {
     id 'org.asciidoctor.jvm.convert' version '3.3.2'
 }
 
-group 'com.tsinsi.fumble.account'
-version '0.0.1-SNAPSHOT'
+group = 'com.tsinsi.account'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '18'
 
 ext {
     restdocsVersion = '3.0.0-SNAPSHOT'

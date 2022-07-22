@@ -1,7 +1,9 @@
 server:
-  port: 9999
+  port: 9001
 
 spring:
+  application:
+    name: account
   security:
     oauth2:
       client:
