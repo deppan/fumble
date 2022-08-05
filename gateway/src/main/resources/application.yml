@@ -10,4 +10,11 @@ spring:
         - id: account-service
           uri: ${account.uri}
           predicates:
-            -Path=/**
+            - Path=/**
+
+hashids:
+  salt: J5%pN84xi5MZ
+
+whitelist:
+  paths:
+    - /login
