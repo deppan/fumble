@@ -5,5 +5,8 @@ pluginManagement {
     }
 }
 
+include 'scaffold'
+include 'auth'
 include 'account'
+include 'gateway'
 

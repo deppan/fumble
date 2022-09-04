@@ -1,0 +1,7 @@
+spring:
+  config:
+    import: classpath:development.yml
+
+logging:
+  level:
+    com.tsinsi.auth: DEBUG

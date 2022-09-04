@@ -1,12 +1,11 @@
 plugins {
     id 'java'
-    id 'org.springframework.boot' version '3.0.0-M4'
+    id 'org.springframework.boot' version "$springBootVersion"
     id 'org.asciidoctor.jvm.convert' version '3.3.2'
 }
 
 group = 'com.tsinsi.account'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '18'
 
 ext {
     restdocsVersion = '3.0.0-SNAPSHOT'
@@ -25,9 +24,8 @@ test {
 dependencies {
     asciidoctorExtensions "org.springframework.restdocs:spring-restdocs-asciidoctor:$restdocsVersion"
 
-    implementation 'com.nimbusds:nimbus-jose-jwt:9.23'
-    implementation 'org.hashids:hashids:1.0.3'
-    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+    implementation project(':scaffold')
+
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
 }
 

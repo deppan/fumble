@@ -1,5 +1,5 @@
 server:
-  port: 9001
+  port: 9002
 
 spring:
   application:
@@ -20,10 +20,6 @@ spring:
             scope:
               - email
               - public_profile
-
-mybatis:
-  configuration:
-    map-underscore-to-camel-case: true
 
 whitelist:
   paths:

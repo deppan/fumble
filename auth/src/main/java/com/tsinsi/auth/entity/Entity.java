@@ -1,0 +1,11 @@
+package com.tsinsi.auth.entity;
+
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.tsinsi.configuration.IdJsonSerializer;
+import lombok.Getter;
+
+@Getter
+public class Entity {
+    @JsonSerialize(using = IdJsonSerializer.class)
+    private long id;
+}

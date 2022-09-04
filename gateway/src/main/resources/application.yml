@@ -7,11 +7,14 @@ spring:
   cloud:
     gateway:
       routes:
-        - id: account-service
+        - id: auth
+          uri: ${auth.uri}
+          predicates:
+            - Path=/login
+        - id: account
           uri: ${account.uri}
           predicates:
-            - Path=/**
-
+            - Path=/users/**, /user/**
 hashids:
   salt: J5%pN84xi5MZ
 
