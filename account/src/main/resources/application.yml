@@ -2,30 +2,7 @@ server:
   port: 9002
 
 spring:
+  config:
+    import: classpath:base.yml
   application:
     name: account
-  security:
-    oauth2:
-      client:
-        registration:
-          google:
-            client-id: id
-            client-secret: secret
-            scope:
-              - email
-              - profile
-          facebook:
-            client-id: id
-            client-secret: secret
-            scope:
-              - email
-              - public_profile
-
-whitelist:
-  paths:
-    - /
-    - /accounts
-    - /account/*
-
-hashids:
-  salt: J5%pN84xi5MZ

@@ -8,8 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 @Repository
 @CacheConfig(cacheNames = "account")
 public class AccountRepositoryProvider implements AccountProvider {
@@ -24,13 +22,8 @@ public class AccountRepositoryProvider implements AccountProvider {
     }
 
     @Override
-    public List<Account> findBefore(long id) {
-        return accountReaderMapper.findBefore(id);
-    }
-
-    @Override
-    public List<Account> findAfter(long id) {
-        return accountReaderMapper.findAfter(id);
+    public Account signup(Account account) {
+        return accountWriterMapper.insert(account);
     }
 
     @Override

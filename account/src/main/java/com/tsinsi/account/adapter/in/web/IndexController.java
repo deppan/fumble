@@ -3,6 +3,8 @@ package com.tsinsi.account.adapter.in.web;
 import com.tsinsi.account.application.port.in.AccountService;
 import com.tsinsi.account.entity.Account;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.logging.log4j.util.Strings;
+import org.hashids.Hashids;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,14 +19,25 @@ public class IndexController {
 
     private final AccountService accountService;
 
-    public IndexController(AccountService findAccount) {
+    private final Hashids hashids;
+
+    public IndexController(AccountService findAccount, Hashids hashids) {
         this.accountService = findAccount;
+        this.hashids = hashids;
     }
 
     @GetMapping(value = "/users")
     public ResponseEntity<Object> accounts(@RequestParam(value = "before", required = false) String before,
                                            @RequestParam(value = "after", required = false) String after) {
-        List<Account> accounts = accountService.findAccounts(before, after);
+        long beforeId = 0;
+        long afterId = 0;
+        if (!Strings.isEmpty(before)) {
+            beforeId = hashids.decode(before)[0];
+        } else if (!Strings.isEmpty(after)) {
+            afterId = hashids.decode(after)[0];
+        }
+
+        List<Account> accounts = accountService.findAccounts(beforeId, afterId);
         return ResponseEntity.ok(accounts);
     }
 
