@@ -2,7 +2,7 @@ package com.tsinsi.auth.application.port.out;
 
 import com.tsinsi.auth.entity.Account;
 
-public interface AccountProvider {
+public interface AccountRepository {
 
     Account signup(Account account);
 

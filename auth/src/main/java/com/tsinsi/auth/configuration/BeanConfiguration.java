@@ -1,6 +1,6 @@
 package com.tsinsi.auth.configuration;
 
-import com.tsinsi.auth.adapter.out.mapper.AccountRepositoryProvider;
+import com.tsinsi.auth.application.port.out.AccountRepository;
 import com.tsinsi.auth.entity.Account;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.userdetails.User;
@@ -20,7 +20,7 @@ public class BeanConfiguration {
     }
 
     @Bean
-    public UserDetailsService userDetailsService(AccountRepositoryProvider repository) {
+    public UserDetailsService userDetailsService(AccountRepository repository) {
         return username -> {
             Account account = repository.findByUsername(username);
             return User.withUsername(String.valueOf(account.getId()))

@@ -1,6 +1,6 @@
 package com.tsinsi.auth.application.service;
 
-import com.tsinsi.auth.adapter.out.mapper.AccountRepositoryProvider;
+import com.tsinsi.auth.adapter.out.mapper.AccountRepositoryImpl;
 import com.tsinsi.auth.application.port.in.AccountService;
 import com.tsinsi.auth.entity.Account;
 import org.apache.logging.log4j.util.Strings;
@@ -10,10 +10,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class AccountServiceImpl implements AccountService {
 
-    private final AccountRepositoryProvider repository;
+    private final AccountRepositoryImpl repository;
 
     @Autowired
-    public AccountServiceImpl(AccountRepositoryProvider repository) {
+    public AccountServiceImpl(AccountRepositoryImpl repository) {
         this.repository = repository;
     }
 

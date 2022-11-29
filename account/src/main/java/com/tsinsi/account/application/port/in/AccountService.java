@@ -6,7 +6,9 @@ import java.util.List;
 
 public interface AccountService {
 
-    List<Account> findAccounts(long beforeId, long afterId);
+    List<Account> findAfterAccounts(long afterId);
+
+    List<Account> findBeforeAccounts(long beforeId);
 
     Account findOne(String username);
 }

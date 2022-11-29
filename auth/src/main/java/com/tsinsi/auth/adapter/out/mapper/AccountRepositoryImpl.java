@@ -2,21 +2,19 @@ package com.tsinsi.auth.adapter.out.mapper;
 
 import com.tsinsi.auth.adapter.out.mapper.reader.AccountReaderMapper;
 import com.tsinsi.auth.adapter.out.mapper.writer.AccountWriterMapper;
-import com.tsinsi.auth.application.port.out.AccountProvider;
+import com.tsinsi.auth.application.port.out.AccountRepository;
 import com.tsinsi.auth.entity.Account;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.stereotype.Repository;
 
 @Repository
-@CacheConfig(cacheNames = "account")
-public class AccountRepositoryProvider implements AccountProvider {
+public class AccountRepositoryImpl implements AccountRepository {
 
     private final AccountWriterMapper accountWriterMapper;
     private final AccountReaderMapper accountReaderMapper;
 
     @Autowired
-    public AccountRepositoryProvider(AccountWriterMapper accountWriterMapper, AccountReaderMapper accountReaderMapper) {
+    public AccountRepositoryImpl(AccountWriterMapper accountWriterMapper, AccountReaderMapper accountReaderMapper) {
         this.accountWriterMapper = accountWriterMapper;
         this.accountReaderMapper = accountReaderMapper;
     }

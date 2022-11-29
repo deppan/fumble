@@ -29,15 +29,17 @@ public class IndexController {
     @GetMapping(value = "/users")
     public ResponseEntity<Object> accounts(@RequestParam(value = "before", required = false) String before,
                                            @RequestParam(value = "after", required = false) String after) {
-        long beforeId = 0;
-        long afterId = 0;
+        List<Account> accounts;
         if (!Strings.isEmpty(before)) {
-            beforeId = hashids.decode(before)[0];
+            long beforeId = hashids.decode(before)[0];
+            accounts = accountService.findBeforeAccounts(beforeId);
         } else if (!Strings.isEmpty(after)) {
-            afterId = hashids.decode(after)[0];
+            long afterId = hashids.decode(after)[0];
+            accounts = accountService.findAfterAccounts(afterId);
+        } else {
+            return ResponseEntity.ok(null);
         }
 
-        List<Account> accounts = accountService.findAccounts(beforeId, afterId);
         return ResponseEntity.ok(accounts);
     }
 

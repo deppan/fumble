@@ -4,7 +4,7 @@ import com.tsinsi.account.entity.Account;
 
 import java.util.List;
 
-public interface AccountProvider {
+public interface AccountRepository {
 
     List<Account> findBefore(long id);
 
