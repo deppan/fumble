@@ -2,19 +2,25 @@ plugins {
     id 'java'
     id 'org.springframework.boot' version "$springBootVersion"
     id 'org.asciidoctor.jvm.convert' version '3.3.2'
-    id 'org.graalvm.buildtools.native' version '0.9.18'
 }
 
 group = 'com.tsinsi.account'
 version = '0.0.1-SNAPSHOT'
 
 ext {
-    restdocsVersion = '3.0.0'
     snippetsDir = file('build/generated-snippets')
 }
 
 configurations {
-    asciidoctorExt
+    asciidoctorExtensions
+}
+
+dependencies {
+    asciidoctorExtensions 'org.springframework.restdocs:spring-restdocs-asciidoctor'
+
+    implementation project(':scaffold')
+
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
 }
 
 test {
@@ -22,22 +28,15 @@ test {
     outputs.dir snippetsDir
 }
 
-dependencies {
-    asciidoctorExt "org.springframework.restdocs:spring-restdocs-asciidoctor:$restdocsVersion"
-
-    implementation project(':scaffold')
-
-    developmentOnly 'org.springframework.boot:spring-boot-devtools'
-}
-
 asciidoctor {
-    configurations "asciidoctorExt"
+    configurations "asciidoctorExtensions"
     inputs.dir snippetsDir
     dependsOn test
 }
 
-jar {
+bootJar {
     dependsOn asciidoctor
+
     from("${asciidoctor.outputDir}") {
         into 'static/docs'
     }

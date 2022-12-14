@@ -9,6 +9,7 @@ dependencies {
     api 'org.springframework.boot:spring-boot-starter-web'
     api 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.0'
     api 'org.redisson:redisson:3.18.0'
-    api 'io.lettuce:lettuce-core:6.2.1.RELEASE'
     api 'org.hashids:hashids:1.0.3'
+
+    runtimeOnly 'mysql:mysql-connector-java'
 }

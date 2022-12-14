@@ -30,14 +30,17 @@ public class IndexController {
     public ResponseEntity<Object> accounts(@RequestParam(value = "before", required = false) String before,
                                            @RequestParam(value = "after", required = false) String after) {
         List<Account> accounts;
-        if (!Strings.isEmpty(before)) {
-            long beforeId = hashids.decode(before)[0];
-            accounts = accountService.findBeforeAccounts(beforeId);
-        } else if (!Strings.isEmpty(after)) {
-            long afterId = hashids.decode(after)[0];
-            accounts = accountService.findAfterAccounts(afterId);
+        long id = 0;
+        try {
+            id = hashids.decode(before)[0];
+        } catch (Exception ignored) {
+        }
+        if (id > 0 && !Strings.isEmpty(before)) {
+            accounts = accountService.findBeforeAccounts(id);
+        } else if (id > 0 && !Strings.isEmpty(after)) {
+            accounts = accountService.findAfterAccounts(id);
         } else {
-            return ResponseEntity.ok(null);
+            accounts = accountService.findAfterAccounts(0);
         }
 
         return ResponseEntity.ok(accounts);

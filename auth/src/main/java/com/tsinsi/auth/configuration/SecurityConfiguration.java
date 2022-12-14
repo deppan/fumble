@@ -25,7 +25,7 @@ public class SecurityConfiguration {
                 .and();
 
         http.authorizeHttpRequests((authorize) ->
-                authorize.antMatchers(whitelist.getPaths())
+                authorize.requestMatchers(whitelist.getPaths())
                         .permitAll()
                         .anyRequest()
                         .authenticated()
