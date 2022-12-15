@@ -6,8 +6,10 @@ Deppan;
 :toc: left
 :toclevels: 4
 :sectlinks:
-:operation-curl-request-title: Example request
-:operation-http-response-title: Example response
+:operation-http-request-title: 请求示例
+:operation-http-response-title: 返回示例
+:operation-response-fields-title: 字段说明
+:operation-request-fields-title: 请求字段
 
 [[overview]]
 = Overview
@@ -79,63 +81,31 @@ Users of the API should not create URIs themselves, instead they should use the 
 [[resources]]
 = Resources
 
-[[resources_index]]
+[[resources_account]]
 == Account
 
-The parameter of
-
 include::{snippets}/account/path-parameters.adoc[]
+[[resources_account_access]]
+=== Accessing the account
 
-The response of fields
+A `GET` request is used to access the account
 
-include::{snippets}/account/response-fields.adoc[]
+operation::account[snippets='http-request,http-response,response-fields']
 
-The account provides the entry point into the service.
+[[resources_accounts]]
+== Accounts
 
-include::{snippets}/account/http-response.adoc[]
+[[resources_accounts_list]]
+=== Listing accounts
 
-[[resources_index_access]]
-=== Accessing the index
+A `GET` request will list all of the service's accounts.
 
-A `GET` request is used to access the index
+operation::accounts[snippets='response-fields,http-request,http-response']
 
-operation::index-example[snippets='response-fields,http-response,links']
+[[resources_account_create]]
+=== Creating an account
 
-[[resources_notes]]
-== Notes
+A `POST` request is used to create an account.
 
-The Notes resources is used to create and list notes
-
-[[resources_notes_list]]
-=== Listing notes
-
-A `GET` request will list all of the service's notes.
-
-operation::notes-list-example[snippets='response-fields,curl-request,http-response']
-
-[[resources_notes_create]]
-=== Creating a note
-
-A `POST` request is used to create a note.
-
-operation::notes-create-example[snippets='request-fields,curl-request,http-response']
-
-[[resources_tags]]
-== Tags
-
-The Tags resource is used to create and list tags.
-
-[[resources_tags_list]]
-=== Listing tags
-
-A `GET` request will list all of the service's tags.
-
-operation::tags-list-example[snippets='response-fields,curl-request,http-response']
-
-[[resources_tags_create]]
-=== Creating a tag
-
-A `POST` request is used to create a note
-
-operation::tags-create-example[snippets='request-fields,curl-request,http-response']
+operation::accounts-create[snippets='request-fields,http-request,http-response']
 
