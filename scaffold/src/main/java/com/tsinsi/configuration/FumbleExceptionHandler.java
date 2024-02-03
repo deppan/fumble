@@ -1,7 +1,6 @@
 package com.tsinsi.configuration;
 
 import jakarta.validation.ConstraintViolationException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpStatus;
@@ -18,8 +17,12 @@ import java.util.Map;
 
 @ControllerAdvice
 public class FumbleExceptionHandler {
-    @Autowired
-    private MessageSource messageSource;
+
+    private final MessageSource messageSource;
+
+    public FumbleExceptionHandler(MessageSource messageSource) {
+        this.messageSource = messageSource;
+    }
 
     @ExceptionHandler({BindException.class})
     public ResponseEntity<?> bindException(BindException exception) {

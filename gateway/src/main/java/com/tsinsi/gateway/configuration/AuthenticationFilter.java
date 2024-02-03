@@ -2,7 +2,6 @@ package com.tsinsi.gateway.configuration;
 
 import com.tsinsi.gateway.configuration.util.MapClaims;
 import org.apache.logging.log4j.util.Strings;
-import org.hashids.Hashids;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
@@ -12,6 +11,7 @@ import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
+import org.sqids.Sqids;
 import reactor.core.publisher.Mono;
 
 import java.util.List;
@@ -23,7 +23,7 @@ public class AuthenticationFilter implements GlobalFilter {
     private Whitelist whitelist;
 
     @Autowired
-    private Hashids hashids;
+    private Sqids sqids;
 
     @Autowired
     private JwtHelper jwtHelper;
@@ -46,8 +46,8 @@ public class AuthenticationFilter implements GlobalFilter {
                 return onError(exchange, HttpStatus.UNAUTHORIZED);
             }
             String subject = mapClaims.subject();
-            long[] id = hashids.decode(subject);
-            exchange.getRequest().mutate().header("id", String.valueOf(id[0])).build();
+            List<Long> id = sqids.decode(subject);
+            exchange.getRequest().mutate().header("id", String.valueOf(id.get(0))).build();
         }
 
         return chain.filter(exchange);

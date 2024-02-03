@@ -12,11 +12,11 @@ ext {
 }
 
 configurations {
-    asciidoctorExtensions
+    asciidoctorExt
 }
 
 dependencies {
-    asciidoctorExtensions 'org.springframework.restdocs:spring-restdocs-asciidoctor'
+    asciidoctorExt 'org.springframework.restdocs:spring-restdocs-asciidoctor'
 
     implementation project(':scaffold')
 
@@ -29,9 +29,15 @@ test {
 }
 
 asciidoctor {
-    configurations "asciidoctorExtensions"
+    configurations "asciidoctorExt"
     inputs.dir snippetsDir
     dependsOn test
+}
+
+asciidoctorj {
+    modules {
+        diagram.use()
+    }
 }
 
 bootJar {

@@ -8,22 +8,23 @@ import com.nimbusds.jwt.JWTClaimsSet;
 import com.nimbusds.jwt.SignedJWT;
 import com.tsinsi.auth.configuration.util.ClaimSet;
 import com.tsinsi.auth.configuration.util.MapClaims;
-import org.hashids.Hashids;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.ResourceUtils;
+import org.sqids.Sqids;
 
 import java.io.File;
 import java.security.KeyStore;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
+import java.util.List;
 
 public class JwtHelper {
 
     private RSAKey rsaKey;
 
     @Autowired
-    private Hashids hashids;
+    private Sqids sqids;
 
     public JwtHelper() {
         try {
@@ -36,7 +37,7 @@ public class JwtHelper {
 
     public String generate(ClaimSet claimSet) {
         try {
-            String hash = hashids.encode(claimSet.getUid());
+            String hash = sqids.encode(List.of(claimSet.getUid()));
             JWSHeader header = new JWSHeader.Builder(JWSAlgorithm.RS256).type(JOSEObjectType.JWT).build();
             JWTClaimsSet.Builder builder = new JWTClaimsSet.Builder();
             builder.subject(hash);

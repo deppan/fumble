@@ -1,15 +1,15 @@
 package com.tsinsi.gateway.configuration;
 
-import org.hashids.Hashids;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
+import org.sqids.Sqids;
 
 @Component
 public class BeanConfiguration {
 
-    @Value("${hashids.salt}")
-    private String salt = "";
+    @Value("${sqids.alphabet}")
+    private String alphabet = "";
 
     @Bean
     public JwtHelper jwtHelper() {
@@ -17,8 +17,8 @@ public class BeanConfiguration {
     }
 
     @Bean
-    public Hashids hashids() {
-        return new Hashids(salt);
+    public Sqids hashids() {
+        return Sqids.builder().minLength(12).alphabet(alphabet).build();
     }
 
 }

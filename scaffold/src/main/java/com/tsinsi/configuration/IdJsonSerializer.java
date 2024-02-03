@@ -3,22 +3,21 @@ package com.tsinsi.configuration;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
-import org.hashids.Hashids;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.jackson.JsonComponent;
+import org.sqids.Sqids;
 
 import java.io.IOException;
+import java.util.List;
 
-@JsonComponent
 public class IdJsonSerializer extends JsonSerializer<Long> {
 
-    @Value("${hashids.salt}")
-    private String salt = "";
+    private final Sqids sqids;
 
-    private final Hashids hashids = new Hashids(salt);
+    public IdJsonSerializer(Sqids sqids) {
+        this.sqids = sqids;
+    }
 
     @Override
     public void serialize(Long value, JsonGenerator gen, SerializerProvider serializers) throws IOException {
-        gen.writeString(hashids.encode(value));
+        gen.writeString(sqids.encode(List.of(value)));
     }
 }

@@ -1,38 +1,28 @@
 package com.tsinsi.configuration;
 
-import jakarta.validation.Validator;
-import org.hashids.Hashids;
-import org.hibernate.validator.HibernateValidator;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.lang.NonNull;
-import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
-import org.springframework.validation.beanvalidation.MethodValidationPostProcessor;
+import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.serializer.RedisSerializer;
+import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.web.servlet.LocaleResolver;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
+import org.sqids.Sqids;
 
 import java.util.Locale;
 
 @Configuration
 public class FumbleConfiguration {
 
-    @Value("${hashids.salt}")
-    private String salt = "";
-
-    private final MessageSource messageSource;
-
-    public FumbleConfiguration(MessageSource messageSource) {
-        this.messageSource = messageSource;
-    }
+    @Value("${sqids.alphabet}")
+    private String alphabet = "";
 
     @Bean
-    public Hashids hashids() {
-        return new Hashids(salt);
+    public Sqids sqids() {
+        return Sqids.builder().minLength(12).alphabet(alphabet).build();
     }
 
     @Bean
@@ -43,30 +33,19 @@ public class FumbleConfiguration {
     }
 
     @Bean
-    public WebMvcConfigurer webMvcConfigurer() {
-        return new WebMvcConfigurer() {
-            @Override
-            public void addInterceptors(@NonNull InterceptorRegistry registry) {
-                LocaleChangeInterceptor interceptor = new LocaleChangeInterceptor();
-                interceptor.setParamName("language");
-                registry.addInterceptor(interceptor);
-            }
-        };
+    public LocaleChangeInterceptor localeChangeInterceptor() {
+        LocaleChangeInterceptor interceptor = new LocaleChangeInterceptor();
+        interceptor.setParamName("lang");
+        return interceptor;
     }
 
     @Bean
-    public MethodValidationPostProcessor methodValidationPostProcessor(Validator validator) {
-        MethodValidationPostProcessor postProcessor = new MethodValidationPostProcessor();
-        postProcessor.setValidator(validator);
-        return postProcessor;
-    }
-
-    @Bean
-    public Validator validator() {
-        LocalValidatorFactoryBean validator = new LocalValidatorFactoryBean();
-        validator.setValidationMessageSource(messageSource);
-        validator.setProviderClass(HibernateValidator.class);
-        validator.getValidationPropertyMap().put("hibernate.validator.fail_fast", "true");
-        return validator;
+    public RedisTemplate<String, byte[]> byteRedisTemplate(RedisConnectionFactory connectionFactory) {
+        RedisTemplate<String, byte[]> redisTemplate = new RedisTemplate<>();
+        redisTemplate.setConnectionFactory(connectionFactory);
+        redisTemplate.setValueSerializer(RedisSerializer.byteArray());
+        redisTemplate.setKeySerializer(new StringRedisSerializer());
+        redisTemplate.afterPropertiesSet();
+        return redisTemplate;
     }
 }

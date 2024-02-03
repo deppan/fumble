@@ -7,3 +7,5 @@ spring:
       - classpath:base.yml
   application:
     name: account
+  profiles:
+    active: development

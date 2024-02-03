@@ -1,0 +1,119 @@
+= Account API
+Deppan;
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toc-title: Account API
+:toclevels: 1
+:sectlinks:
+
+[[overview]]
+= Overview
+
+include::{includedir}/common.adoc[]
+
+[[overview_errors]]
+== Errors
+
+Whenever an error response (status code >= 400) is returned, the body will contain a JSON object that describes the problem.
+The error object has the following structure:
+
+For example, a request that attempts to apply a non-existent tag to a note will produce a
+`400 Bad Request` response:
+
+[[overview_hypermedia]]
+== Hypermedia
+
+[mermaid,format="svg"]
+....
+flowchart TD
+    A[使用者] --> |访问| B[www.?.com]
+    B -. 默认 .-> B0[国外]
+    B --> |是|B1[国内组]
+    B --> |是|B2[Netflix]
+    B --> |是|B3[HBO]
+    B --> |是|B4[Apple]
+    B --> |是|B5[Amazon]
+    B --> |是|B6[Youtube]
+    subgraph 分组无法处理
+    B0:::board
+    classDef board stroke:#f00
+    end
+    subgraph 分组
+    B1
+    end
+    subgraph 分组
+    B2
+    end
+    subgraph 分组
+    B3
+    end
+    subgraph 分组
+    B4
+    end
+    subgraph 分组
+    B5
+    end
+    subgraph 分组
+    B6
+    end
+    B0 --> C0
+    B1 --> C1
+    B2 --> C2
+    B3 --> C3
+    B4 --> C4
+    B5 --> C5
+    B6 --> C6
+    subgraph 国外
+    C0[国外服务器]:::board
+    classDef board stroke:#f00
+    end
+    subgraph 国内
+    C1[国内服务器]
+    end
+    subgraph Nefflix
+    C2[Netflix 服务器]
+    end
+    subgraph HBO
+    C3[HBO 服务器]
+    end
+    subgraph Apple
+    C4[Apple 服务器]
+    end
+    subgraph Amazon
+    C5[Amazon 服务器]
+    end
+    subgraph Youtube
+    C6[Youtube 服务器]
+    end
+....
+
+RESTful Notes uses hypermedia and resources include links to other resources in their responses.
+Responses are in https://github.com/mikekelly/hal_specification[Hypertext
+Application Language (HAL)] format.
+Links can be found beneath the `_links` key.
+Users of the API should not create URIs themselves, instead they should use the above-described links to navigate from resource to resource.
+
+[[resources]]
+= Resources
+
+[[resources_account]]
+== Account
+
+[[resources_account_access]]
+=== Accessing the account
+
+A `GET` request is used to access the account
+
+operation::account[snippets='http-request,http-response,path-parameters,response-fields']
+
+[[resources_accounts]]
+== Accounts
+
+[[resources_accounts_list]]
+=== Listing accounts
+
+A `GET` request will list all of the service's accounts.
+
+operation::accounts[snippets='response-fields,http-request,http-response']
