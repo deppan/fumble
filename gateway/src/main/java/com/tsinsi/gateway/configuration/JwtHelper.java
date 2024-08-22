@@ -35,7 +35,6 @@ public class JwtHelper {
             Payload payload = object.getPayload();
             return new MapClaims(payload.toJSONObject());
         } catch (Exception e) {
-            e.printStackTrace();
             return new MapClaims(null);
         }
     }

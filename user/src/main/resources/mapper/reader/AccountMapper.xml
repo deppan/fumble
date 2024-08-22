@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
-<mapper namespace="com.tsinsi.auth.adapter.out.mapper.reader.UserReaderMapper">
+<mapper namespace="com.tsinsi.user.adapter.out.mapper.reader.UserReaderMapper">
 
-    <resultMap id="UserMap" type="com.tsinsi.auth.entity.User">
+    <resultMap id="account" type="com.tsinsi.user.entity.User">
         <id property="username" column="username"/>
         <id property="password" column="password"/>
         <id property="gender" column="gender"/>
         <id property="id" column="id"/>
     </resultMap>
 
-    <select id="findById" resultMap="UserMap">
+    <select id="findById" resultMap="account">
         select id, username, password, nickname, gender
         from tb_accounts
         where id = #{id}

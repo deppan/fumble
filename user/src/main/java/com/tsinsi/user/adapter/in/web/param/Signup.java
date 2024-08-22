@@ -1,6 +1,5 @@
-package com.tsinsi.auth.adapter.in.web.param;
+package com.tsinsi.user.adapter.in.web.param;
 
-import com.tsinsi.auth.entity.User;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,13 +13,4 @@ public class Signup {
     private String password;
     private String nickname;
     private int gender;
-
-    public User toUser() {
-        User user = new User();
-        user.setUsername(username);
-        user.setNickname(nickname);
-        user.setPassword(password);
-        user.setGender(gender);
-        return user;
-    }
 }

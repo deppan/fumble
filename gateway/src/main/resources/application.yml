@@ -4,6 +4,8 @@ server:
 spring:
   application:
     name: gateway
+  profiles:
+    active: development
   cloud:
     gateway:
       routes:
@@ -11,8 +13,8 @@ spring:
           uri: ${auth.uri}
           predicates:
             - Path=/login
-        - id: account
-          uri: ${account.uri}
+        - id: user
+          uri: ${user.uri}
           predicates:
             - Path=/users/**, /user/**
 sqids:

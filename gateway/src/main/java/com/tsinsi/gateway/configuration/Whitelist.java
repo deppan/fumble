@@ -2,20 +2,18 @@ package com.tsinsi.gateway.configuration;
 
 import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.stereotype.Component;
+import org.springframework.context.annotation.Configuration;
 
-import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 
-@Component
-@ConfigurationProperties(prefix = "whitelist")
 @Setter
-class Whitelist {
+@Configuration
+@ConfigurationProperties(prefix = "whitelist")
+public class Whitelist {
 
-    private List<String> paths = null;
+    private List<String> path = null;
 
-    public List<String> getPaths() {
-        return Objects.requireNonNullElse(paths, Collections.emptyList());
+    public List<String> getPath() {
+        return path != null ? path : List.of();
     }
 }

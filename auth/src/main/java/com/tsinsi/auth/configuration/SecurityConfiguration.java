@@ -3,6 +3,7 @@ package com.tsinsi.auth.configuration;
 import com.tsinsi.auth.configuration.util.AppAccessDeniedHandler;
 import com.tsinsi.auth.configuration.util.FailureAuthenticationEntryPoint;
 import jakarta.validation.constraints.NotNull;
+import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,6 +15,7 @@ import org.springframework.security.web.SecurityFilterChain;
 
 import java.util.Optional;
 
+@Setter
 @Configuration
 @EnableWebSecurity
 @ConfigurationProperties(prefix = "whitelist")

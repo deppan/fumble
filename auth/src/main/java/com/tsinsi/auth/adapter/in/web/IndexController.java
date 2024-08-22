@@ -2,12 +2,11 @@ package com.tsinsi.auth.adapter.in.web;
 
 import com.tsinsi.auth.adapter.in.web.param.SignIn;
 import com.tsinsi.auth.adapter.in.web.param.Signup;
-import com.tsinsi.auth.application.port.in.AccountService;
+import com.tsinsi.auth.application.port.in.UserService;
 import com.tsinsi.auth.configuration.JwtHelper;
 import com.tsinsi.auth.configuration.util.ClaimSet;
-import com.tsinsi.auth.entity.Account;
+import com.tsinsi.auth.entity.User;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -18,24 +17,25 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
 
-@Slf4j(topic = "account")
+@Slf4j(topic = "auth")
 @RestController
 public class IndexController {
 
-    @Autowired
-    private JwtHelper jwtHelper;
+    private final JwtHelper jwtHelper;
+    private final UserService userService;
+    private final AuthenticationManager authenticationManager;
 
-    @Autowired
-    private AuthenticationManager authenticationManager;
-
-    @Autowired
-    private AccountService accountService;
+    IndexController(JwtHelper jwtHelper, UserService userService, AuthenticationManager authenticationManager) {
+        this.jwtHelper = jwtHelper;
+        this.userService = userService;
+        this.authenticationManager = authenticationManager;
+    }
 
     @PostMapping(value = "/signup")
     public ResponseEntity<Object> signup(@Validated Signup signup) {
-        Account tmp = AccountMapper.mapperBy(signup);
-        Account account = accountService.signup(tmp);
-        String token = generateToken(String.valueOf(account.getId()));
+        User tmp = signup.toUser();
+        User user = userService.signup(tmp);
+        String token = generateToken(String.valueOf(user.getId()));
         return ResponseEntity.ok(Map.of("token", token));
     }
 

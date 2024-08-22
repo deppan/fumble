@@ -1,5 +1,5 @@
 auth:
   uri: http://localhost:9001/
 
-account:
+user:
   uri: http://localhost:9002/

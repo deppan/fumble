@@ -5,18 +5,13 @@ spring:
       password: FlM34FN&peIc
       host: 127.0.0.1
       timeout: 30s
-      lettuce:
-        cluster:
-          refresh:
-            adaptive: true
-            period: 20
 
   datasource:
     writer:
       driver-class-name: com.mysql.cj.jdbc.Driver
       username: writer
       password: dbforstudy
-      jdbc-url: jdbc:mysql://127.0.0.1:3306/db_study?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&allowPublicKeyRetrieval=true&useSSL=false
+      jdbc-url: jdbc:mysql://127.0.0.1:3306/db_study
       connection-timeout: 30000
       idle-timeout: 600000
       max-lifetime: 1800000
@@ -26,7 +21,7 @@ spring:
       driver-class-name: com.mysql.cj.jdbc.Driver
       username: reader
       password: dbforstudy
-      jdbc-url: jdbc:mysql://127.0.0.1:3306/db_study?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&allowPublicKeyRetrieval=true&useSSL=false
+      jdbc-url: jdbc:mysql://127.0.0.1:3306/db_study
       connection-timeout: 30000
       idle-timeout: 600000
       max-lifetime: 1800000

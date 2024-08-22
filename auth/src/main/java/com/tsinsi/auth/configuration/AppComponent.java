@@ -1,11 +1,10 @@
 package com.tsinsi.auth.configuration;
 
-import com.tsinsi.auth.application.port.out.AccountRepository;
-import com.tsinsi.auth.entity.Account;
+import com.tsinsi.auth.application.port.out.UserRepository;
+import com.tsinsi.auth.entity.User;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -22,11 +21,11 @@ public class AppComponent {
     }
 
     @Bean
-    public UserDetailsService userDetailsService(AccountRepository repository) {
+    public UserDetailsService userDetailsService(UserRepository repository) {
         return username -> {
-            Account account = repository.findByUsername(username);
-            return User.withUsername(String.valueOf(account.getId()))
-                    .password(account.getPassword())
+            User user = repository.findByUsername(username);
+            return org.springframework.security.core.userdetails.User.withUsername(String.valueOf(user.getId()))
+                    .password(user.getPassword())
                     .authorities(Collections.emptyList())
                     .accountExpired(false)
                     .accountLocked(false)

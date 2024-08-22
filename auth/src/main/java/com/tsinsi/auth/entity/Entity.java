@@ -7,7 +7,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class Entity {
+public abstract class Entity {
     @JsonSerialize(using = IdJsonSerializer.class)
     private long id;
 }

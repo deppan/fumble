@@ -19,19 +19,29 @@ import java.util.List;
 @Component
 public class AuthenticationFilter implements GlobalFilter {
 
-    @Autowired
+    private Sqids sqids;
+    private JwtHelper jwtHelper;
     private Whitelist whitelist;
 
     @Autowired
-    private Sqids sqids;
+    public void setJwtHelper(JwtHelper jwtHelper) {
+        this.jwtHelper = jwtHelper;
+    }
 
     @Autowired
-    private JwtHelper jwtHelper;
+    public void setSqids(Sqids sqids) {
+        this.sqids = sqids;
+    }
+
+    @Autowired
+    public void setWhitelist(Whitelist whitelist) {
+        this.whitelist = whitelist;
+    }
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         ServerHttpRequest request = exchange.getRequest();
-        if (whitelist.getPaths().stream().noneMatch(uri -> request.getURI().getPath().contains(uri))) {
+        if (whitelist.getPath().stream().noneMatch(uri -> request.getURI().getPath().contains(uri))) {
             String bearerToken = getToken(request);
             if (bearerToken == null || !bearerToken.startsWith("Bearer")) {
                 return onError(exchange, HttpStatus.FORBIDDEN);
@@ -61,7 +71,7 @@ public class AuthenticationFilter implements GlobalFilter {
 
     private String getToken(ServerHttpRequest request) {
         List<String> list = request.getHeaders().getOrEmpty(HttpHeaders.AUTHORIZATION);
-        if (list.size() == 0) {
+        if (list.isEmpty()) {
             return null;
         }
         return list.get(0);
