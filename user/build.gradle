@@ -1,7 +1,7 @@
 plugins {
     id 'java'
     id 'org.springframework.boot' version "$springBootVersion"
-    id 'org.asciidoctor.jvm.convert' version '3.3.2'
+    id 'org.asciidoctor.jvm.convert' version '4.0.3'
 }
 
 group = 'com.tsinsi.user'
@@ -23,15 +23,16 @@ dependencies {
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
 }
 
-test {
-    useTestNG()
+tasks.named('test') {
     outputs.dir snippetsDir
+    useJUnitPlatform()
 }
 
-asciidoctor {
+tasks.named('asciidoctor') {
     configurations "asciidoctorExt"
     inputs.dir snippetsDir
     dependsOn test
+    baseDirFollowsSourceDir()
 }
 
 asciidoctorj {

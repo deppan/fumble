@@ -9,7 +9,7 @@ version = '0.0.1-SNAPSHOT'
 dependencies {
     implementation project(':scaffold')
 
-    implementation 'com.nimbusds:nimbus-jose-jwt:9.25.6'
+    implementation 'com.nimbusds:nimbus-jose-jwt:9.40'
     implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
 
     developmentOnly 'org.springframework.boot:spring-boot-devtools'

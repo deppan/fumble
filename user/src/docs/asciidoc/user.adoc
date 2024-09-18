@@ -11,7 +11,7 @@ Deppan;
 [[overview]]
 = Overview
 
-include::{includedir}/common.adoc[]
+include::common.adoc[]
 
 [[overview_errors]]
 == Errors
@@ -25,6 +25,8 @@ For example, a request that attempts to apply a non-existent tag to a note will 
 [[overview_hypermedia]]
 == Hypermedia
 
+[%collapsible]
+====
 [mermaid,format="svg"]
 ....
 flowchart TD
@@ -88,6 +90,7 @@ flowchart TD
     C6[Youtube 服务器]
     end
 ....
+====
 
 RESTful Notes uses hypermedia and resources include links to other resources in their responses.
 Responses are in https://github.com/mikekelly/hal_specification[Hypertext
@@ -99,21 +102,21 @@ Users of the API should not create URIs themselves, instead they should use the 
 = Resources
 
 [[resources_account]]
-== Account
+== User
 
 [[resources_account_access]]
 === Accessing the account
 
 A `GET` request is used to access the account
 
-operation::account[snippets='http-request,http-response,path-parameters,response-fields']
+operation::user[snippets='http-request,http-response,path-parameters,response-fields']
 
 [[resources_accounts]]
-== Accounts
+== Users
 
 [[resources_accounts_list]]
 === Listing accounts
 
-A `GET` request will list all of the service's accounts.
+A `GET` request will list all the service's accounts.
 
-operation::accounts[snippets='response-fields,http-request,http-response']
+operation::users[snippets='http-request,http-response,response-fields']
