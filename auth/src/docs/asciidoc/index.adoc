@@ -1,0 +1,6 @@
+= Api Document
+Deppan;
+
+:toc-title: Api Document
+
+* link:auth[Index]

@@ -2,9 +2,11 @@ package com.tsinsi.auth.application.service;
 
 import com.tsinsi.auth.application.port.in.UserService;
 import com.tsinsi.auth.application.port.out.UserRepository;
+import com.tsinsi.auth.configuration.util.AppException;
 import com.tsinsi.auth.entity.User;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -18,11 +20,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User signup(User account) {
-        if (Strings.isEmpty(account.getUsername()) || Strings.isEmpty(account.getPassword())) {
-            throw new RuntimeException();
+    public User signup(User user) throws Exception {
+        if (Strings.isEmpty(user.getUsername()) || Strings.isEmpty(user.getPassword())) {
+            throw new AppException(HttpStatus.BAD_REQUEST);
         }
-        return userRepository.signup(account);
+        User tmp = userRepository.findByUsername(user.getUsername());
+        if (tmp != null) {
+            throw new AppException(HttpStatus.CONFLICT);
+        }
+        return userRepository.signup(user);
     }
 
     @Override

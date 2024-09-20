@@ -109,7 +109,7 @@ Users of the API should not create URIs themselves, instead they should use the 
 
 A `GET` request is used to access the account
 
-operation::user[snippets='http-request,http-response,path-parameters,response-fields']
+operation::user[]
 
 [[resources_accounts]]
 == Users
@@ -119,4 +119,4 @@ operation::user[snippets='http-request,http-response,path-parameters,response-fi
 
 A `GET` request will list all the service's accounts.
 
-operation::users[snippets='http-request,http-response,response-fields']
+operation::users[]

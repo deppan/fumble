@@ -4,9 +4,11 @@ import com.tsinsi.auth.adapter.in.web.param.SignIn;
 import com.tsinsi.auth.adapter.in.web.param.Signup;
 import com.tsinsi.auth.application.port.in.UserService;
 import com.tsinsi.auth.configuration.JwtHelper;
+import com.tsinsi.auth.configuration.util.AppException;
 import com.tsinsi.auth.configuration.util.ClaimSet;
 import com.tsinsi.auth.entity.User;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -25,22 +27,30 @@ public class IndexController {
     private final UserService userService;
     private final AuthenticationManager authenticationManager;
 
-    IndexController(JwtHelper jwtHelper, UserService userService, AuthenticationManager authenticationManager) {
+    public IndexController(JwtHelper jwtHelper, UserService userService, AuthenticationManager authenticationManager) {
         this.jwtHelper = jwtHelper;
         this.userService = userService;
         this.authenticationManager = authenticationManager;
     }
 
     @PostMapping(value = "/signup")
-    public ResponseEntity<Object> signup(@Validated Signup signup) {
+    public ResponseEntity<?> signup(@Validated Signup signup) {
         User tmp = signup.toUser();
-        User user = userService.signup(tmp);
-        String token = generateToken(String.valueOf(user.getId()));
-        return ResponseEntity.ok(Map.of("token", token));
+        try {
+            User user = userService.signup(tmp);
+            String token = generateToken(String.valueOf(user.getId()));
+            return ResponseEntity.ok(Map.of("token", token));
+        } catch (Exception exception) {
+            if (exception instanceof AppException appException) {
+                return ResponseEntity.status(appException.getStatus()).build();
+            }else{
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+            }
+        }
     }
 
     @PostMapping(value = "/login")
-    public ResponseEntity<Object> login(@Validated SignIn signIn) {
+    public ResponseEntity<?> login(@Validated SignIn signIn) {
         UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(signIn.getUsername(), signIn.getPassword());
         Authentication authenticate = authenticationManager.authenticate(authentication);
 
