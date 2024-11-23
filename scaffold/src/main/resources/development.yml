@@ -7,26 +7,26 @@ spring:
       timeout: 30s
 
   datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    cachePrepStmts: true
+    prepStmtCacheSize: 250
+    prepStmtCacheSqlLimit: 2048
+    useServerPrepStmts: true
+    useLocalSessionState: true
+    rewriteBatchedStatements: true
+    cacheResultSetMetadata: true
+    cacheServerConfiguration: true
+    elideSetAutoCommits: true
+    maintainTimeStats: false
+
     writer:
-      driver-class-name: com.mysql.cj.jdbc.Driver
       username: writer
       password: dbforstudy
       jdbc-url: jdbc:mysql://127.0.0.1:3306/db_study
-      connection-timeout: 30000
-      idle-timeout: 600000
-      max-lifetime: 1800000
-      maximum-pool-size: 10
-      minimum-idle: 5
     reader:
-      driver-class-name: com.mysql.cj.jdbc.Driver
       username: reader
       password: dbforstudy
       jdbc-url: jdbc:mysql://127.0.0.1:3306/db_study
-      connection-timeout: 30000
-      idle-timeout: 600000
-      max-lifetime: 1800000
-      maximum-pool-size: 10
-      minimum-idle: 5
 
   devtools:
     add-properties: false
