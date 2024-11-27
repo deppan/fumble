@@ -54,13 +54,13 @@ public class AuthApplicationTests extends AbstractTestNGSpringContextTests {
     }
 
     @Test
-    void login() throws Exception {
+    void signIn() throws Exception {
         FormParametersSnippet parameters = formParameters(
                 parameterWithName("username").optional().description("username"),
                 parameterWithName("password").optional().description("password")
         );
         ResponseFieldsSnippet response = responseFields(fieldWithPath("token").description("token"));
-        mockMvc.perform(post("/login")
+        mockMvc.perform(post("/sign-in")
                         .param("username", "deppan")
                         .param("password", "123456")
                 )

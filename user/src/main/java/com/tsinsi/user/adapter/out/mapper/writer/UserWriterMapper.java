@@ -6,6 +6,6 @@ import org.apache.ibatis.annotations.*;
 @Mapper
 public interface UserWriterMapper {
 
-    @Insert("insert into tb_accounts (username, password, gender) values(#{username}, #{password}, #{gender})")
-    int insert(User account);
+    @Insert("insert into tb_users(username, password, nickname, gender) values(#{user.username}, #{user.password}, #{user.nickname}, #{user.gender})")
+    int insert(User user);
 }

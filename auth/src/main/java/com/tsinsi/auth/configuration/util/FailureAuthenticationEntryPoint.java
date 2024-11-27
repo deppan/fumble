@@ -13,6 +13,7 @@ public class FailureAuthenticationEntryPoint implements AuthenticationEntryPoint
 
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException {
-        HttpResponse.response(request, response, HttpStatus.UNAUTHORIZED.value(), Map.of("message", "Authentication failed"));
+        Map<String, Object> map = Map.of("message", "Authentication failed");
+        HttpResponse.response(request, response, HttpStatus.UNAUTHORIZED.value(), map);
     }
 }

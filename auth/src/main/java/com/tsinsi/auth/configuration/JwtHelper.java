@@ -35,42 +35,31 @@ public class JwtHelper {
         }
     }
 
-    public String generate(ClaimSet claimSet) {
-        try {
-            String hash = sqids.encode(List.of(claimSet.getUid()));
-            JWSHeader header = new JWSHeader.Builder(JWSAlgorithm.RS256).type(JOSEObjectType.JWT).build();
-            JWTClaimsSet.Builder builder = new JWTClaimsSet.Builder();
-            builder.subject(hash);
-            builder.issueTime(new Date());
-            builder.issuer("tsinsi");
-            builder.expirationTime(Date.from(Instant.now().plus(claimSet.getDays(), ChronoUnit.DAYS)));
-            builder.audience(claimSet.getUsername());
+    public String onSign(ClaimSet claimSet) throws Exception {
+        String hash = sqids.encode(List.of(claimSet.getUid()));
+        JWSHeader header = new JWSHeader.Builder(JWSAlgorithm.RS256).type(JOSEObjectType.JWT).build();
+        JWTClaimsSet.Builder builder = new JWTClaimsSet.Builder();
+        builder.subject(hash);
+        builder.issueTime(new Date());
+        builder.issuer("tsinsi");
+        builder.expirationTime(Date.from(Instant.now().plus(claimSet.getDays(), ChronoUnit.DAYS)));
+        builder.audience(claimSet.getUsername());
 
-            SignedJWT signedJWT = new SignedJWT(header, builder.build());
-            RSASSASigner rsassaSigner = new RSASSASigner(rsaKey);
-            signedJWT.sign(rsassaSigner);
-            return signedJWT.serialize();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
+        SignedJWT signedJWT = new SignedJWT(header, builder.build());
+        RSASSASigner rsassaSigner = new RSASSASigner(rsaKey);
+        signedJWT.sign(rsassaSigner);
+        return signedJWT.serialize();
     }
 
-    public MapClaims parse(String token) {
-        try {
-            JWSObject object = JWSObject.parse(token);
-            RSAKey publicRSAKey = rsaKey.toPublicJWK();
-            RSASSAVerifier verifier = new RSASSAVerifier(publicRSAKey);
-            if (!object.verify(verifier)) {
-                return new MapClaims(null);
-            }
-
-            Payload payload = object.getPayload();
-            return new MapClaims(payload.toJSONObject());
-        } catch (Exception e) {
-            e.printStackTrace();
+    public MapClaims parse(String token) throws Exception{
+        JWSObject object = JWSObject.parse(token);
+        RSAKey publicRSAKey = rsaKey.toPublicJWK();
+        RSASSAVerifier verifier = new RSASSAVerifier(publicRSAKey);
+        if (!object.verify(verifier)) {
             return new MapClaims(null);
         }
-    }
 
+        Payload payload = object.getPayload();
+        return new MapClaims(payload.toJSONObject());
+    }
 }

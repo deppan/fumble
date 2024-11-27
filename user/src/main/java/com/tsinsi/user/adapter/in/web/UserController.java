@@ -35,15 +35,15 @@ public class UserController {
         List<User> users;
         long id = 0;
         try {
-            id = sqids.decode(before).get(0);
+            id = sqids.decode(before).getFirst();
         } catch (Exception ignored) {
         }
         if (id > 0 && !Strings.isEmpty(before)) {
-            users = userService.findBeforeAccounts(id);
+            users = userService.findBeforeUsers(id);
         } else if (id > 0 && !Strings.isEmpty(after)) {
-            users = userService.findAfterAccounts(id);
+            users = userService.findAfterUsers(id);
         } else {
-            users = userService.findAfterAccounts(0);
+            users = userService.findAfterUsers(0);
         }
 
         return ResponseEntity.ok(users);

@@ -57,7 +57,7 @@ public class AuthenticationFilter implements GlobalFilter {
             }
             String subject = mapClaims.subject();
             List<Long> id = sqids.decode(subject);
-            exchange.getRequest().mutate().header("id", String.valueOf(id.get(0))).build();
+            exchange.getRequest().mutate().header("id", String.valueOf(id.getFirst())).build();
         }
 
         return chain.filter(exchange);
@@ -74,6 +74,6 @@ public class AuthenticationFilter implements GlobalFilter {
         if (list.isEmpty()) {
             return null;
         }
-        return list.get(0);
+        return list.getFirst();
     }
 }

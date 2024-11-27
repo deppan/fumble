@@ -1,4 +1,4 @@
-package com.tsinsi.user.configuration;
+package com.tsinsi.foundation;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;

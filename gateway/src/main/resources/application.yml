@@ -12,7 +12,8 @@ spring:
         - id: auth
           uri: ${auth.uri}
           predicates:
-            - Path=/login
+            - Path=/sign-in
+            - Path=/sign-up
         - id: user
           uri: ${user.uri}
           predicates:
@@ -22,4 +23,5 @@ sqids:
 
 whitelist:
   paths:
-    - /login
+    - /sign-in
+    - /sign-up

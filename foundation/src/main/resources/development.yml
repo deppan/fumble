@@ -5,7 +5,6 @@ spring:
       password: FlM34FN&peIc
       host: 127.0.0.1
       timeout: 30s
-
   datasource:
     writer:
       username: writer
@@ -37,7 +36,6 @@ spring:
       cacheServerConfiguration: true
       elideSetAutoCommits: true
       maintainTimeStats: false
-
   devtools:
     add-properties: false
 

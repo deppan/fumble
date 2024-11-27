@@ -1,14 +1,12 @@
 package com.tsinsi.auth.adapter.in.web;
 
 import com.tsinsi.auth.adapter.in.web.param.SignIn;
-import com.tsinsi.auth.adapter.in.web.param.Signup;
+import com.tsinsi.auth.adapter.in.web.param.SignUp;
 import com.tsinsi.auth.application.port.in.UserService;
 import com.tsinsi.auth.configuration.JwtHelper;
-import com.tsinsi.auth.configuration.util.AppException;
 import com.tsinsi.auth.configuration.util.ClaimSet;
 import com.tsinsi.auth.entity.User;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -33,42 +31,25 @@ public class IndexController {
         this.authenticationManager = authenticationManager;
     }
 
-    @PostMapping(value = "/signup")
-    public ResponseEntity<?> signup(@Validated Signup signup) {
+    @PostMapping("/sign-up")
+    public ResponseEntity<?> signUp(@Validated SignUp signup) throws Exception {
         User tmp = signup.toUser();
-        try {
-            User user = userService.signup(tmp);
-            String token = generateToken(String.valueOf(user.getId()));
-            return ResponseEntity.ok(Map.of("token", token));
-        } catch (Exception exception) {
-            if (exception instanceof AppException appException) {
-                return ResponseEntity.status(appException.getStatus()).build();
-            }else{
-                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-            }
-        }
+        User user = userService.signup(tmp);
+        return ResponseEntity.ok(Map.of("token", sign(String.valueOf(user.getId()))));
     }
 
-    @PostMapping(value = "/login")
-    public ResponseEntity<?> login(@Validated SignIn signIn) {
+    @PostMapping("/sign-in")
+    public ResponseEntity<?> signIn(@Validated SignIn signIn) throws Exception {
         UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(signIn.getUsername(), signIn.getPassword());
         Authentication authenticate = authenticationManager.authenticate(authentication);
-
-        String name = authenticate.getName();
-        ClaimSet claimSet = new ClaimSet();
-        claimSet.setDays(3);
-        claimSet.setUsername(name);
-        claimSet.setUid(Long.parseLong(name));
-
-        String token = jwtHelper.generate(claimSet);
-        return ResponseEntity.ok(Map.of("token", token));
+        return ResponseEntity.ok(Map.of("token", sign(authenticate.getName())));
     }
 
-    private String generateToken(String uid) {
+    private String sign(String uid) throws Exception {
         ClaimSet claimSet = new ClaimSet();
         claimSet.setDays(3);
         claimSet.setUsername(uid);
         claimSet.setUid(Long.parseLong(uid));
-        return jwtHelper.generate(claimSet);
+        return jwtHelper.onSign(claimSet);
     }
 }

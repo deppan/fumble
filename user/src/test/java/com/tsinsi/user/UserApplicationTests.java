@@ -44,22 +44,22 @@ public class UserApplicationTests {
                 .build();
     }
 
-    private FieldDescriptor[] accountFields() {
+    private FieldDescriptor[] userFields() {
         return new FieldDescriptor[]{
                 fieldWithPath("id").description("id"),
-                fieldWithPath("username").description("Username of the account"),
-                fieldWithPath("nickname").description("Nickname of the account"),
-                fieldWithPath("gender").description("Gender of the account")
+                fieldWithPath("username").description("Username of the user"),
+                fieldWithPath("nickname").description("Nickname of the user"),
+                fieldWithPath("gender").description("Gender of the user")
         };
     }
 
     @Test
     public void users() throws Exception {
         QueryParametersSnippet request = queryParameters(
-                parameterWithName("before").optional().description("The accounts before it"),
-                parameterWithName("after").optional().description("The accounts after it")
+                parameterWithName("before").optional().description("The users before it"),
+                parameterWithName("after").optional().description("The users after it")
         );
-        ResponseFieldsSnippet response = responseFields(fieldWithPath("[]").description("An array of accounts")).andWithPrefix("[].", accountFields());
+        ResponseFieldsSnippet response = responseFields(fieldWithPath("[]").description("An array of users")).andWithPrefix("[].", userFields());
         mockMvc.perform(get("/users").param("after", "r"))
                 .andExpect(status().isOk())
                 .andDo(document("{method-name}", request, response));
@@ -67,9 +67,9 @@ public class UserApplicationTests {
 
     @Test
     public void user() throws Exception {
-        ResponseFieldsSnippet response = responseFields(accountFields());
+        ResponseFieldsSnippet response = responseFields(userFields());
         mockMvc.perform(get("/user/{username}", "deppan"))
                 .andExpect(status().isOk())
-                .andDo(document("{method-name}", pathParameters(parameterWithName("username").description("The account's username")), response));
+                .andDo(document("{method-name}", pathParameters(parameterWithName("username").description("The user's username")), response));
     }
 }

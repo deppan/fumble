@@ -4,4 +4,4 @@ spring:
 
 logging:
   level:
-    com.tsinsi.account: DEBUG
+    com.tsinsi.user: DEBUG

@@ -1,10 +1,10 @@
-= Account API
+= User API
 Deppan;
 :doctype: book
 :icons: font
 :source-highlighter: highlightjs
 :toc: left
-:toc-title: Account API
+:toc-title: User API
 :toclevels: 1
 :sectlinks:
 
@@ -101,22 +101,22 @@ Users of the API should not create URIs themselves, instead they should use the 
 [[resources]]
 = Resources
 
-[[resources_account]]
+[[resources_user]]
 == User
 
-[[resources_account_access]]
-=== Accessing the account
+[[resources_user_access]]
+=== Accessing the user
 
-A `GET` request is used to access the account
+A `GET` request is used to access the user
 
 operation::user[]
 
-[[resources_accounts]]
+[[resources_users]]
 == Users
 
-[[resources_accounts_list]]
-=== Listing accounts
+[[resources_users_list]]
+=== Listing users
 
-A `GET` request will list all the service's accounts.
+A `GET` request will list all the service's users.
 
 operation::users[]

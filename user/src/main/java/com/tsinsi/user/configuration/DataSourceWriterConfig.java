@@ -16,7 +16,7 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
 import javax.sql.DataSource;
 
-@Configuration(proxyBeanMethods = false)
+@Configuration
 @MapperScan(basePackages = "com.tsinsi.user.adapter.out.mapper.writer", sqlSessionTemplateRef = "writerSqlSessionTemplate")
 public class DataSourceWriterConfig {
 

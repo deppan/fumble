@@ -13,6 +13,7 @@ public class AppAccessDeniedHandler implements AccessDeniedHandler {
 
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException) throws IOException {
-        HttpResponse.response(request, response, HttpStatus.FORBIDDEN.value(), Map.of("message", "Access denied"));
+        Map<String, Object> map = Map.of("message", "Access denied");
+        HttpResponse.response(request, response, HttpStatus.FORBIDDEN.value(), map);
     }
 }

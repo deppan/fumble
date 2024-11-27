@@ -4,7 +4,7 @@ import com.tsinsi.auth.entity.User;
 
 public interface UserService {
 
-    User signup(User account) throws Exception;
+    User signup(User user) throws Exception;
 
     User findOne(String username);
 

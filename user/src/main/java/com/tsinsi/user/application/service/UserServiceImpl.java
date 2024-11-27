@@ -19,12 +19,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> findAfterAccounts(long afterId) {
+    public List<User> findAfterUsers(long afterId) {
         return repository.findAfter(afterId);
     }
 
     @Override
-    public List<User> findBeforeAccounts(long afterId) {
+    public List<User> findBeforeUsers(long afterId) {
         return repository.findBefore(afterId);
     }
 

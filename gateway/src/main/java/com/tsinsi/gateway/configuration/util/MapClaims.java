@@ -22,8 +22,8 @@ public class MapClaims {
         }
 
         long timestamp = Instant.now().toEpochMilli() / 1000;
-        long expiresAt = (long) map.get(JWTClaimNames.EXPIRATION_TIME);
-        return timestamp < expiresAt;
+        long expiredAt = (long) map.get(JWTClaimNames.EXPIRATION_TIME);
+        return timestamp < expiredAt;
     }
 
     public String subject() {

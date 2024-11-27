@@ -7,7 +7,7 @@ import org.springframework.http.HttpStatus;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.time.Instant;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,7 +18,7 @@ public class HttpResponse {
         response.setStatus(status);
         Map<String, Object> map = new HashMap<>();
         if (status != HttpStatus.OK.value()) {
-            map.put("timestamp", Instant.now().toEpochMilli());
+            map.put("date", new Date());
             map.put("url", request.getRequestURI());
         }
         if (data != null && !data.isEmpty()) {

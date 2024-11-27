@@ -1,4 +1,4 @@
-package com.tsinsi.configuration;
+package com.tsinsi.foundation;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
@@ -19,7 +19,7 @@ public class IdDeserializer extends JsonDeserializer<Long> {
     public Long deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
         String text = p.getText();
         try {
-            return sqids.decode(text).get(0);
+            return sqids.decode(text).getFirst();
         } catch (Exception ignored) {
         }
         return 0L;

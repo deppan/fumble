@@ -15,7 +15,7 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
 import javax.sql.DataSource;
 
-@Configuration(proxyBeanMethods = false)
+@Configuration
 @MapperScan(basePackages = "com.tsinsi.user.adapter.out.mapper.reader", sqlSessionTemplateRef = "readerSqlSessionTemplate")
 public class DataSourceReaderConfig {
 

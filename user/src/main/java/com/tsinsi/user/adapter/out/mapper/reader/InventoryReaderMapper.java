@@ -1,6 +1,6 @@
 package com.tsinsi.user.adapter.out.mapper.reader;
 
-import com.tsinsi.user.configuration.JsonTypeHandler;
+import com.tsinsi.foundation.JsonTypeHandler;
 import com.tsinsi.user.entity.Inventory;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Result;

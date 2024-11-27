@@ -1,4 +1,4 @@
-package com.tsinsi.configuration;
+package com.tsinsi.foundation;
 
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;

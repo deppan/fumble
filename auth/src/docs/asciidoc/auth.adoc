@@ -4,7 +4,7 @@ Deppan;
 :icons: font
 :source-highlighter: highlightjs
 :toc: left
-:toc-title: Account API
+:toc-title: Auth API
 :toclevels: 1
 :sectlinks:
 
@@ -40,6 +40,6 @@ Users of the API should not create URIs themselves, instead they should use the 
 [[resources_login]]
 === Login
 
-A `GET` request will list all the service's accounts.
+A `GET` request will list all the service's users.
 
 operation::login[]
