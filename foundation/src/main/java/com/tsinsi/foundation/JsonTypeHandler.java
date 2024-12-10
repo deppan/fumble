@@ -17,9 +17,6 @@ public class JsonTypeHandler<T> extends BaseTypeHandler<T> {
     private final ObjectMapper objectMapper;
 
     public JsonTypeHandler(Class<T> clazz) {
-        if (clazz == null) {
-            throw new IllegalArgumentException("Type argument cannot be null");
-        }
         this.clazz = clazz;
         this.objectMapper = new ObjectMapper();
     }
