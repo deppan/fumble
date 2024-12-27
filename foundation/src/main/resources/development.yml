@@ -9,7 +9,7 @@ spring:
     writer:
       username: writer
       password: dbforstudy
-      jdbc-url: jdbc:mysql://127.0.0.1:3306/db_study
+      jdbc-url: jdbc:mysql://127.0.0.1:3306/study
       driver-class-name: com.mysql.cj.jdbc.Driver
       cachePrepStmts: true
       prepStmtCacheSize: 250
@@ -24,7 +24,7 @@ spring:
     reader:
       username: reader
       password: dbforstudy
-      jdbc-url: jdbc:mysql://127.0.0.1:3306/db_study
+      jdbc-url: jdbc:mysql://127.0.0.1:3306/study
       driver-class-name: com.mysql.cj.jdbc.Driver
       cachePrepStmts: true
       prepStmtCacheSize: 250
@@ -46,8 +46,8 @@ mybatis:
 
 logging:
   level:
+    ch.qos.logback: ERROR
     com.zaxxer.hikari: DEBUG
-    web: DEBUG
 
 sqids:
   alphabet: lHyvdsuj65rYFWpT2CBfRbUhKDGxJAzQaZ47XSc0VgPImtk8o3nwEq1NMe9OiL

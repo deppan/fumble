@@ -9,6 +9,6 @@ import org.apache.ibatis.annotations.Options;
 public interface UserWriterMapper {
 
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
-    @Insert("insert into tb_users (username, password, nickname, gender) values(#{username}, #{password}, #{nickname}, #{gender})")
+    @Insert("insert into users (username, password, nickname, gender) values(#{username}, #{password}, #{nickname}, #{gender})")
     User insert(User user);
 }

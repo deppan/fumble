@@ -16,8 +16,8 @@ public class IdDeserializer extends JsonDeserializer<Long> {
     }
 
     @Override
-    public Long deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
-        String text = p.getText();
+    public Long deserialize(JsonParser parser, DeserializationContext context) throws IOException {
+        String text = parser.getText();
         try {
             return sqids.decode(text).getFirst();
         } catch (Exception ignored) {

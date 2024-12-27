@@ -1,10 +1,10 @@
 plugins {
-    id 'org.springframework.boot' version "$springBootVersion"
     id 'java'
-    id 'org.asciidoctor.jvm.convert' version '4.0.3'
+    id 'org.springframework.boot' version "$springBootVersion"
+    id 'org.asciidoctor.jvm.convert' version '4.0.4'
 }
 
-group = 'com.tsinsi'
+group = 'com.tsinsi.auth'
 version = '0.0.1-SNAPSHOT'
 
 ext {

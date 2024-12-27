@@ -16,7 +16,7 @@ import org.sqids.Sqids;
 
 import java.util.List;
 
-@Slf4j(topic = "user")
+@Slf4j
 @RestController
 public class UserController {
 

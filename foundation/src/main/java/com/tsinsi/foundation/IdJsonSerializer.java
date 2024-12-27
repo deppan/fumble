@@ -17,7 +17,7 @@ public class IdJsonSerializer extends JsonSerializer<Long> {
     }
 
     @Override
-    public void serialize(Long value, JsonGenerator gen, SerializerProvider serializers) throws IOException {
-        gen.writeString(sqids.encode(List.of(value)));
+    public void serialize(Long value, JsonGenerator generator, SerializerProvider serializers) throws IOException {
+        generator.writeString(sqids.encode(List.of(value)));
     }
 }

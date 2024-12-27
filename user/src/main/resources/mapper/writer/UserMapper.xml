@@ -4,7 +4,7 @@
 <mapper namespace="com.tsinsi.user.adapter.out.mapper.writer.UserWriterMapper">
 
     <update id="updateUser">
-        update tb_users
+        update users
         set gender = 1;
     </update>
 

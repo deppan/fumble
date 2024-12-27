@@ -12,7 +12,7 @@
 
     <select id="findById" resultMap="UserMap">
         select id, username, password, nickname, gender
-        from tb_users
+        from users
         where id = #{id}
     </select>
 
