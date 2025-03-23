@@ -1,12 +1,9 @@
 package com.tsinsi.user.adapter.in.web;
 
-import com.tsinsi.user.adapter.out.mapper.reader.InventoryReaderMapper;
 import com.tsinsi.user.application.port.in.UserService;
-import com.tsinsi.user.entity.Inventory;
 import com.tsinsi.user.entity.User;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.logging.log4j.util.Strings;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -49,13 +46,8 @@ public class UserController {
         return ResponseEntity.ok(users);
     }
 
-    @Autowired
-    InventoryReaderMapper inventoryReaderMapper;
-
     @GetMapping(value = {"/user/{username}"})
     public ResponseEntity<Object> user(@PathVariable("username") String username) {
-        List<Inventory> inventories = inventoryReaderMapper.find(1);
-
         User user = userService.findOne(username);
         return ResponseEntity.ok(user);
     }

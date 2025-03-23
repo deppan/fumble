@@ -3,15 +3,19 @@ package com.tsinsi.foundation;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.jackson.JsonComponent;
 import org.sqids.Sqids;
 
 import java.io.IOException;
 
+@JsonComponent
 public class IdDeserializer extends JsonDeserializer<Long> {
 
-    private final Sqids sqids;
+    private Sqids sqids;
 
-    public IdDeserializer(Sqids sqids) {
+    @Autowired
+    public void setSqids(Sqids sqids) {
         this.sqids = sqids;
     }
 

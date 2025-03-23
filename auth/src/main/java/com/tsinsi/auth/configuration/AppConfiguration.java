@@ -1,19 +1,20 @@
 package com.tsinsi.auth.configuration;
 
-import com.tsinsi.auth.application.port.out.UserRepository;
+import com.tsinsi.auth.application.port.out.repository.UserRepository;
 import com.tsinsi.auth.entity.User;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Component;
+import org.sqids.Sqids;
 
 import java.util.Collections;
 
-@Component
-public class AppComponent {
+@Configuration
+public class AppConfiguration {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -41,7 +42,8 @@ public class AppComponent {
     }
 
     @Bean
-    public JwtHelper jwtHelper() {
-        return new JwtHelper();
+    public JwtHelper jwtHelper(Sqids sqids) {
+        return new JwtHelper(sqids);
     }
+
 }

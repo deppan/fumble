@@ -16,6 +16,7 @@ configurations {
 }
 
 dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
     asciidoctorExt 'org.springframework.restdocs:spring-restdocs-asciidoctor'
 
     implementation project(':foundation')

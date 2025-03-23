@@ -34,8 +34,7 @@ public class IndexController {
     @PostMapping("/sign-up")
     public ResponseEntity<?> signUp(@Validated SignUp signup) throws Exception {
         User tmp = signup.toUser();
-        User user = userService.signup(tmp);
-        return ResponseEntity.ok(Map.of("token", sign(String.valueOf(user.getId()))));
+        return userService.signup(tmp);
     }
 
     @PostMapping("/sign-in")

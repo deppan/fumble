@@ -6,7 +6,7 @@ spring:
       host: 127.0.0.1
       timeout: 30s
   datasource:
-    writer:
+    source:
       username: writer
       password: dbforstudy
       jdbc-url: jdbc:mysql://127.0.0.1:3306/study
@@ -21,7 +21,7 @@ spring:
       cacheServerConfiguration: true
       elideSetAutoCommits: true
       maintainTimeStats: false
-    reader:
+    replica:
       username: reader
       password: dbforstudy
       jdbc-url: jdbc:mysql://127.0.0.1:3306/study
@@ -38,6 +38,11 @@ spring:
       maintainTimeStats: false
   devtools:
     add-properties: false
+  jpa:
+    properties:
+      hibernate:
+        format_sql: true
+    show-sql: true
 
 mybatis:
   configuration:

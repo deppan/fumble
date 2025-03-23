@@ -8,7 +8,6 @@ import com.nimbusds.jwt.JWTClaimsSet;
 import com.nimbusds.jwt.SignedJWT;
 import com.tsinsi.auth.configuration.util.ClaimSet;
 import com.tsinsi.auth.configuration.util.MapClaims;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.ResourceUtils;
 import org.sqids.Sqids;
 
@@ -23,10 +22,10 @@ public class JwtHelper {
 
     private RSAKey rsaKey;
 
-    @Autowired
-    private Sqids sqids;
+    private final Sqids sqids;
 
-    public JwtHelper() {
+    public JwtHelper(Sqids sqids) {
+        this.sqids = sqids;
         try {
             File file = ResourceUtils.getFile("classpath:jwt.jks");
             rsaKey = RSAKey.load(KeyStore.getInstance(file, "KbMG52t#sMTF".toCharArray()), "tsinsi.com", "KbMG52t#sMTF".toCharArray());
@@ -51,7 +50,7 @@ public class JwtHelper {
         return signedJWT.serialize();
     }
 
-    public MapClaims parse(String token) throws Exception{
+    public MapClaims parse(String token) throws Exception {
         JWSObject object = JWSObject.parse(token);
         RSAKey publicRSAKey = rsaKey.toPublicJWK();
         RSASSAVerifier verifier = new RSASSAVerifier(publicRSAKey);

@@ -1,7 +1,7 @@
 package com.tsinsi.user.application.service;
 
 import com.tsinsi.user.application.port.in.UserService;
-import com.tsinsi.user.application.port.out.UserRepository;
+import com.tsinsi.user.application.port.out.repository.UserRepository;
 import com.tsinsi.user.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
