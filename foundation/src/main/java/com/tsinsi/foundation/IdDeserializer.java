@@ -14,6 +14,9 @@ public class IdDeserializer extends JsonDeserializer<Long> {
 
     private Sqids sqids;
 
+    public IdDeserializer() {
+    }
+
     @Autowired
     public void setSqids(Sqids sqids) {
         this.sqids = sqids;

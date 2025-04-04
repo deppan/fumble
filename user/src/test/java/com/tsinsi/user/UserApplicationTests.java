@@ -72,4 +72,5 @@ public class UserApplicationTests {
                 .andExpect(status().isOk())
                 .andDo(document("{method-name}", pathParameters(parameterWithName("username").description("The user's username")), response));
     }
+
 }

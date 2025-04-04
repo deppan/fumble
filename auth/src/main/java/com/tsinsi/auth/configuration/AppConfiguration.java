@@ -1,11 +1,12 @@
 package com.tsinsi.auth.configuration;
 
-import com.tsinsi.auth.application.port.out.repository.UserRepository;
-import com.tsinsi.auth.entity.User;
+import com.tsinsi.auth.application.out.UserPersistencePort;
+import com.tsinsi.auth.domain.persistence.UserEntity;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -22,11 +23,11 @@ public class AppConfiguration {
     }
 
     @Bean
-    public UserDetailsService userDetailsService(UserRepository repository) {
+    public UserDetailsService userDetailsService(UserPersistencePort userPersistencePort) {
         return username -> {
-            User user = repository.findByUsername(username);
-            return org.springframework.security.core.userdetails.User.withUsername(String.valueOf(user.getId()))
-                    .password(user.getPassword())
+            UserEntity userEntity = userPersistencePort.findByUsername(username);
+            return User.withUsername(String.valueOf(userEntity.getId()))
+                    .password(userEntity.getPassword())
                     .authorities(Collections.emptyList())
                     .accountExpired(false)
                     .accountLocked(false)

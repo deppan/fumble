@@ -39,20 +39,17 @@ spring:
   devtools:
     add-properties: false
   jpa:
+    open-in-view: false
     properties:
       hibernate:
         format_sql: true
     show-sql: true
 
-mybatis:
-  configuration:
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-    map-underscore-to-camel-case: true
-
 logging:
   level:
     ch.qos.logback: ERROR
     com.zaxxer.hikari: DEBUG
+    org.hibernate.orm.jdbc.bind: TRACE
 
 sqids:
   alphabet: lHyvdsuj65rYFWpT2CBfRbUhKDGxJAzQaZ47XSc0VgPImtk8o3nwEq1NMe9OiL

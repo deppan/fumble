@@ -2,6 +2,7 @@ package com.tsinsi.foundation;
 
 import jakarta.annotation.Nonnull;
 import jakarta.servlet.http.HttpServletRequest;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpHeaders;
@@ -22,6 +23,7 @@ import java.util.List;
 import java.util.Map;
 
 @ControllerAdvice
+@Slf4j
 public class FumbleExceptionHandler extends ResponseEntityExceptionHandler {
 
     private final MessageSource messageSource;
@@ -31,16 +33,19 @@ public class FumbleExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<?> handleUnknownException(HttpServletRequest request) {
+    public ResponseEntity<?> handleUnknownException(Exception exception, HttpServletRequest request) {
+        log.error(request.getRequestURI(), exception);
+
         Map<String, Object> map = Map.of("url", request.getRequestURI(), "date", new Date());
         return new ResponseEntity<>(map, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @Override
-    protected ResponseEntity<Object> handleMethodArgumentNotValid(@Nonnull MethodArgumentNotValidException ex,
-                                                                  @Nonnull HttpHeaders headers,
-                                                                  @Nonnull HttpStatusCode status,
-                                                                  @Nonnull WebRequest request) {
+    protected ResponseEntity<Object> handleMethodArgumentNotValid(
+            @Nonnull MethodArgumentNotValidException ex,
+            @Nonnull HttpHeaders headers,
+            @Nonnull HttpStatusCode status,
+            @Nonnull WebRequest request) {
         return this.handleBindException(ex, request);
     }
 
