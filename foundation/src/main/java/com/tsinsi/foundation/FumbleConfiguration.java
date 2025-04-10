@@ -22,7 +22,7 @@ public class FumbleConfiguration {
 
     @Bean
     public Sqids sqids() {
-        return Sqids.builder().minLength(12).alphabet(alphabet).build();
+        return Sqids.builder().minLength(6).alphabet(alphabet).build();
     }
 
     @Bean
@@ -48,4 +48,5 @@ public class FumbleConfiguration {
         redisTemplate.afterPropertiesSet();
         return redisTemplate;
     }
+
 }

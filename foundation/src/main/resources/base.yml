@@ -16,9 +16,6 @@ spring:
     virtual:
       enabled: true
 
-mybatis:
-  type-handlers-package: com.tsinsi.foundation.JsonTypeHandler
-
 logging:
   file:
     path: ./logs
