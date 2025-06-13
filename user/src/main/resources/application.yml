@@ -4,6 +4,7 @@ server:
 spring:
   config:
     import:
-      - classpath:base.yml
+      - optional:classpath:application-base.yml
+
   application:
     name: user

@@ -1,6 +1,7 @@
 spring:
   config:
-    import: classpath:development.yml
+    import:
+      - optional:classpath:application-dev.yml
 
 logging:
   level:

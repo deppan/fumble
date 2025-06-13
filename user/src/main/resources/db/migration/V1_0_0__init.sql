@@ -9,3 +9,7 @@ CREATE TABLE IF NOT EXISTS `users`
     `created_at` datetime         NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (`id`)
 );
+
+# the origin password is '12345678', origin password -> hash(16) -> bcrypt
+insert into users(username, password, nickname, gender)
+values ('deppan', '$2a$12$PuofdyIAv2QWzCgtyY38fOJovtK2dz2seqXTtyWDgR4p1dIDT9BCO', 'ima', 1);

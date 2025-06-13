@@ -5,7 +5,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.redis.repository.configuration.EnableRedisRepositories;
 
 @SpringBootApplication(scanBasePackages = {"com.tsinsi.foundation", "com.tsinsi.user"})
-@EnableRedisRepositories(basePackages = "com.tsinsi.user.domain.persistence.nosql")
 public class UserApplication {
 
     public static void main(String[] args) {

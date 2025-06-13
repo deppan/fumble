@@ -11,9 +11,9 @@ import java.util.List;
 @ConfigurationProperties(prefix = "whitelist")
 public class Whitelist {
 
-    private List<String> path = null;
+    private List<String> paths = null;
 
-    public List<String> getPath() {
-        return path != null ? path : List.of();
+    public List<String> getPaths() {
+        return paths != null ? paths : List.of();
     }
 }

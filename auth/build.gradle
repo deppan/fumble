@@ -1,6 +1,7 @@
 plugins {
     id 'java'
-    id 'org.springframework.boot' version "$springBootVersion"
+    id 'buildlogic.spring-conventions'
+    id 'buildlogic.jose-conventions'
     id 'org.asciidoctor.jvm.convert' version '4.0.4'
 }
 
@@ -20,7 +21,6 @@ dependencies {
 
     implementation project(':foundation')
 
-    implementation 'com.nimbusds:nimbus-jose-jwt:9.40'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
 

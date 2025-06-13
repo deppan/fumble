@@ -1,3 +1,4 @@
 spring:
   config:
-    import: classpath:production.yml
+    import:
+      - optional:classpath:application-prod.yml

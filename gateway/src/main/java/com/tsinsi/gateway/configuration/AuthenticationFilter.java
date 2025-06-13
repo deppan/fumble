@@ -41,7 +41,7 @@ public class AuthenticationFilter implements GlobalFilter {
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         ServerHttpRequest request = exchange.getRequest();
-        if (whitelist.getPath().stream().noneMatch(uri -> request.getURI().getPath().contains(uri))) {
+        if (whitelist.getPaths().stream().noneMatch(uri -> request.getURI().getPath().contains(uri))) {
             String bearerToken = getToken(request);
             if (bearerToken == null || !bearerToken.startsWith("Bearer")) {
                 return onError(exchange, HttpStatus.FORBIDDEN);

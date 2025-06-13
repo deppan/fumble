@@ -3,7 +3,8 @@ server:
 
 spring:
   config:
-    import: classpath:base.yml
+    import:
+      - optional:classpath:application-base.yml
   application:
     name: auth
   profiles:

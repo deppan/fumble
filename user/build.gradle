@@ -1,6 +1,6 @@
 plugins {
     id 'java'
-    id 'org.springframework.boot' version "$springBootVersion"
+    id 'buildlogic.spring-conventions'
     id 'org.asciidoctor.jvm.convert' version '4.0.4'
 }
 
@@ -16,7 +16,6 @@ configurations {
 }
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-actuator'
     asciidoctorExt 'org.springframework.restdocs:spring-restdocs-asciidoctor'
 
     implementation project(':foundation')

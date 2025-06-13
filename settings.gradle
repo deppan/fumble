@@ -1,5 +1,5 @@
+rootProject.name='fumble'
 include 'foundation'
 include 'auth'
 include 'user'
 include 'gateway'
-
