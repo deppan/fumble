@@ -1,4 +1,4 @@
-package com.tsinsi.user.domain.persistence.nosql;
+package com.tsinsi.user.adapter.out.persistence.nosql;
 
 import jakarta.persistence.Id;
 import lombok.Getter;

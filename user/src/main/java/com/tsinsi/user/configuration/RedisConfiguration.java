@@ -5,7 +5,7 @@ import org.springframework.data.redis.core.RedisKeyValueAdapter;
 import org.springframework.data.redis.repository.configuration.EnableRedisRepositories;
 
 @Configuration
-@EnableRedisRepositories(basePackages = "com.tsinsi.user.domain.persistence.nosql",
+@EnableRedisRepositories(basePackages = "com.tsinsi.user.adapter.out.persistence.nosql",
         enableKeyspaceEvents = RedisKeyValueAdapter.EnableKeyspaceEvents.ON_STARTUP)
 public class RedisConfiguration {
 }

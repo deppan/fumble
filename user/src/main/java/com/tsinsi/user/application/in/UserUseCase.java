@@ -1,15 +1,14 @@
 package com.tsinsi.user.application.in;
 
-import com.tsinsi.user.domain.persistence.sql.UserEntity;
+import com.tsinsi.user.domain.model.User;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface UserUseCase {
 
-    List<UserEntity> findAfterUsers(long afterId);
+    Optional<List<User>> findUsers(long beforeId, long afterId);
 
-    List<UserEntity> findBeforeUsers(long beforeId);
-
-    UserEntity findOne(String username);
+    Optional<User> findOne(String username);
 
 }

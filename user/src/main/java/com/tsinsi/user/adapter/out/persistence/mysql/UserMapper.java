@@ -1,0 +1,17 @@
+package com.tsinsi.user.adapter.out.persistence.mysql;
+
+import com.tsinsi.user.domain.model.User;
+
+public class UserMapper {
+    public static User toUser(UserEntity userEntity) {
+        if (userEntity == null) {
+            return null;
+        }
+        User user = new User();
+        user.setId(userEntity.getId());
+        user.setUsername(userEntity.getUsername());
+        user.setNickname(userEntity.getNickname());
+        user.setGender(userEntity.getGender());
+        return user;
+    }
+}

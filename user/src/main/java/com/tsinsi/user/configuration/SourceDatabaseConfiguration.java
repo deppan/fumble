@@ -17,7 +17,7 @@ import javax.sql.DataSource;
 
 @Configuration
 @EnableJpaRepositories(
-        basePackages = "com.tsinsi.user.domain.persistence.sql",
+        basePackages = "com.tsinsi.user.adapter.out.persistence.mysql",
         entityManagerFactoryRef = "sourceEntityManagerFactory",
         transactionManagerRef = "sourceTransactionManager"
 )

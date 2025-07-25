@@ -1,4 +1,4 @@
-package com.tsinsi.user.domain.persistence.sql;
+package com.tsinsi.user.adapter.out.persistence.mysql;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

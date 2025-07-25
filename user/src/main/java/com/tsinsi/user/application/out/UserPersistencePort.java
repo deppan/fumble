@@ -1,16 +1,17 @@
 package com.tsinsi.user.application.out;
 
-import com.tsinsi.user.domain.persistence.sql.UserEntity;
+import com.tsinsi.user.domain.model.User;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface UserPersistencePort {
 
-    UserEntity findByUsername(String username);
+    Optional<User> findByUsername(String username);
 
-    List<UserEntity> findBefore(@Param("id") long id);
+    Optional<List<User>> findBefore(@Param("id") long id);
 
-    List<UserEntity> findAfter(@Param("id") long id);
+    Optional<List<User>> findAfter(@Param("id") long id);
 
 }
