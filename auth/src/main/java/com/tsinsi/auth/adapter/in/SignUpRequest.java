@@ -1,6 +1,6 @@
-package com.tsinsi.auth.application.in;
+package com.tsinsi.auth.adapter.in;
 
-import com.tsinsi.auth.domain.persistence.UserEntity;
+import com.tsinsi.auth.domain.model.User;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -20,8 +20,8 @@ public class SignUpRequest extends SignInRequest {
     @Min(value = 0, message = "{gender}")
     private Integer gender;
 
-    public UserEntity toEntity() {
-        UserEntity user = new UserEntity();
+    public User toUser() {
+        User user = new User();
         user.setUsername(username);
         user.setNickname(nickname);
         user.setPassword(password);

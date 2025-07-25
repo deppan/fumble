@@ -1,52 +1,47 @@
 package com.tsinsi.auth.application;
 
-import com.tsinsi.auth.application.in.SignUpRequest;
+import com.tsinsi.auth.adapter.in.SignInRequest;
+import com.tsinsi.auth.adapter.in.SignUpRequest;
 import com.tsinsi.auth.application.in.UserUseCase;
+import com.tsinsi.auth.application.mapper.UserResponseMapper;
 import com.tsinsi.auth.application.out.UserPersistencePort;
-import com.tsinsi.auth.configuration.JwtHelper;
-import com.tsinsi.auth.configuration.util.ClaimSet;
-import com.tsinsi.auth.domain.persistence.UserEntity;
-import org.springframework.http.HttpHeaders;
+import com.tsinsi.auth.application.response.UserResponse;
+import com.tsinsi.auth.domain.model.User;
+import com.tsinsi.auth.infrastructure.AppException;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Map;
+import java.util.Optional;
 
 @Service
 public class UserService implements UserUseCase {
 
     private final UserPersistencePort userPersistencePort;
-    private final JwtHelper jwtHelper;
+    private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-    public UserService(UserPersistencePort userPersistencePort, JwtHelper jwtHelper) {
+    public UserService(UserPersistencePort userPersistencePort) {
         this.userPersistencePort = userPersistencePort;
-        this.jwtHelper = jwtHelper;
     }
 
     @Override
-    public ResponseEntity<?> signup(SignUpRequest signUpRequest) throws Exception {
-        UserEntity userEntity = userPersistencePort.findByUsername(signUpRequest.getUsername());
-        if (userEntity != null) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).body(Map.of());
+    public UserResponse signUp(SignUpRequest signUpRequest) {
+        Optional<User> optional = userPersistencePort.findByUsername(signUpRequest.getUsername());
+        if (optional.isEmpty()) {
+            throw new AppException(HttpStatus.CONFLICT);
         }
-        userEntity = userPersistencePort.save(signUpRequest.toEntity());
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("Authorization", "Bearer " + sign(userEntity.getId()));
-        return new ResponseEntity<>(signUpRequest, headers, HttpStatus.OK);
+        User user = userPersistencePort.save(signUpRequest.toUser());
+        return UserResponseMapper.toUserResponse(user);
     }
 
     @Override
-    public UserEntity findOne(String username) {
-        return userPersistencePort.findByUsername(username);
+    public UserResponse signIn(SignInRequest signInRequest) {
+        return userPersistencePort.findByUsername(signInRequest.getUsername()).map(user -> {
+            if (!passwordEncoder.matches(signInRequest.getPassword(), user.getPassword())) {
+                throw new AppException(HttpStatus.UNAUTHORIZED);
+            }
+            return UserResponseMapper.toUserResponse(user);
+        }).orElseThrow();
     }
-
-    private String sign(Long uid) throws Exception {
-        ClaimSet claimSet = new ClaimSet();
-        claimSet.setDays(3);
-        claimSet.setUsername(String.valueOf(uid));
-        claimSet.setUid(uid);
-        return jwtHelper.onSign(claimSet);
-    }
-
 }

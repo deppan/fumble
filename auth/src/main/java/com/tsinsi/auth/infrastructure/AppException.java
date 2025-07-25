@@ -1,4 +1,4 @@
-package com.tsinsi.auth.configuration.util;
+package com.tsinsi.auth.infrastructure;
 
 import lombok.Getter;
 import org.springframework.http.HttpStatus;

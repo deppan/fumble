@@ -1,10 +1,12 @@
 package com.tsinsi.auth.application.out;
 
-import com.tsinsi.auth.domain.persistence.UserEntity;
+import com.tsinsi.auth.domain.model.User;
+
+import java.util.Optional;
 
 public interface UserPersistencePort {
 
-    UserEntity save(UserEntity user);
+    User save(User user);
 
-    UserEntity findByUsername(String username);
+    Optional<User> findByUsername(String username);
 }

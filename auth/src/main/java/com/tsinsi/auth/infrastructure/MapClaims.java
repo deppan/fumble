@@ -1,4 +1,4 @@
-package com.tsinsi.auth.configuration.util;
+package com.tsinsi.auth.infrastructure;
 
 import com.nimbusds.jwt.JWTClaimNames;
 import lombok.Getter;

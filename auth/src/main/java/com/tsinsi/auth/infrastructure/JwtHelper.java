@@ -1,4 +1,4 @@
-package com.tsinsi.auth.configuration;
+package com.tsinsi.auth.infrastructure;
 
 import com.nimbusds.jose.*;
 import com.nimbusds.jose.crypto.RSASSASigner;
@@ -6,8 +6,6 @@ import com.nimbusds.jose.crypto.RSASSAVerifier;
 import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jwt.JWTClaimsSet;
 import com.nimbusds.jwt.SignedJWT;
-import com.tsinsi.auth.configuration.util.ClaimSet;
-import com.tsinsi.auth.configuration.util.MapClaims;
 import org.springframework.util.ResourceUtils;
 import org.sqids.Sqids;
 

@@ -1,7 +1,7 @@
 package com.tsinsi.user.adapter.in;
 
 import com.tsinsi.user.application.in.UserUseCase;
-import com.tsinsi.user.domain.model.User;
+import com.tsinsi.user.application.response.UserResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.StringUtils;
@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.sqids.Sqids;
 
 import java.util.List;
-import java.util.Optional;
 
 @Slf4j
 @RestController
@@ -28,8 +27,8 @@ public class UserController {
     }
 
     @GetMapping(value = "/users")
-    public ResponseEntity<List<User>> users(@RequestParam(value = "before", required = false) String before,
-                                            @RequestParam(value = "after", required = false) String after) {
+    public ResponseEntity<List<UserResponse>> users(@RequestParam(value = "before", required = false) String before,
+                                                    @RequestParam(value = "after", required = false) String after) {
         long beforeId = 0;
         long afterId = 0;
         if (StringUtils.hasLength(before)) {
@@ -45,12 +44,12 @@ public class UserController {
             }
         }
 
-        return userUseCase.findUsers(beforeId, afterId).map(ResponseEntity::ok).orElse(ResponseEntity.ok(List.of()));
+        return ResponseEntity.ok(userUseCase.findUsers(beforeId, afterId));
     }
 
     @GetMapping(value = {"/user/{username}"})
-    public ResponseEntity<User> user(@PathVariable("username") String username) {
-        return userUseCase.findOne(username).map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
+    public ResponseEntity<UserResponse> user(@PathVariable("username") String username) {
+        return ResponseEntity.ok(userUseCase.findOne(username));
     }
 
 }

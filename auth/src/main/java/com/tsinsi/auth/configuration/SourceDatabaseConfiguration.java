@@ -17,7 +17,7 @@ import javax.sql.DataSource;
 
 @Configuration
 @EnableJpaRepositories(
-        basePackages = "com.tsinsi.auth.domain.persistence",
+        basePackages = "com.tsinsi.auth.adapter.out.persistence.repository",
         entityManagerFactoryRef = "sourceEntityManagerFactory",
         transactionManagerRef = "sourceTransactionManager"
 )
@@ -37,7 +37,7 @@ public class SourceDatabaseConfiguration {
             @Qualifier("sourceDataSource") DataSource sourceDataSource) {
         return builder
                 .dataSource(sourceDataSource)
-                .packages("com.tsinsi.auth.domain.persistence")
+                .packages("com.tsinsi.auth.adapter.out.persistence.entity")
                 .persistenceUnit("source")
                 .build();
     }

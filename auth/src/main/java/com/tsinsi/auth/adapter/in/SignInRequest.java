@@ -1,4 +1,4 @@
-package com.tsinsi.auth.application.in;
+package com.tsinsi.auth.adapter.in;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;

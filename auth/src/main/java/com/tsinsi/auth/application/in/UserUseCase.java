@@ -1,12 +1,13 @@
 package com.tsinsi.auth.application.in;
 
-import com.tsinsi.auth.domain.persistence.UserEntity;
-import org.springframework.http.ResponseEntity;
+import com.tsinsi.auth.adapter.in.SignInRequest;
+import com.tsinsi.auth.adapter.in.SignUpRequest;
+import com.tsinsi.auth.application.response.UserResponse;
 
 public interface UserUseCase {
 
-    ResponseEntity<?> signup(SignUpRequest signUpRequest) throws Exception;
+    UserResponse signUp(SignUpRequest signUpRequest) throws Exception;
 
-    UserEntity findOne(String username);
+    UserResponse signIn(SignInRequest signInRequest) throws Exception;
 
 }

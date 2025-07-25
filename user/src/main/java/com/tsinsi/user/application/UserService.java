@@ -1,7 +1,9 @@
 package com.tsinsi.user.application;
 
 import com.tsinsi.user.application.in.UserUseCase;
+import com.tsinsi.user.application.mapper.UserResponseMapper;
 import com.tsinsi.user.application.out.UserPersistencePort;
+import com.tsinsi.user.application.response.UserResponse;
 import com.tsinsi.user.domain.model.User;
 import org.springframework.stereotype.Service;
 
@@ -18,19 +20,22 @@ public class UserService implements UserUseCase {
     }
 
     @Override
-    public Optional<List<User>> findUsers(long beforeId, long afterId) {
+    public List<UserResponse> findUsers(long beforeId, long afterId) {
         Optional<List<User>> users;
         if (beforeId > 0) {
             users = userPersistencePort.findBefore(beforeId);
         } else {
             users = userPersistencePort.findAfter(afterId);
         }
-        return users;
+        return users.map(list -> list.stream()
+                .map(UserResponseMapper::toUserResponse)
+                .toList()
+        ).orElse(List.of());
     }
 
     @Override
-    public Optional<User> findOne(String username) {
-        return userPersistencePort.findByUsername(username);
+    public UserResponse findOne(String username) {
+        return userPersistencePort.findByUsername(username).map(UserResponseMapper::toUserResponse).orElse(null);
     }
 
 }

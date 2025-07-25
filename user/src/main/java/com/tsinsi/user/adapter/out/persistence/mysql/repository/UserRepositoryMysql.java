@@ -1,5 +1,6 @@
-package com.tsinsi.user.adapter.out.persistence.mysql;
+package com.tsinsi.user.adapter.out.persistence.mysql.repository;
 
+import com.tsinsi.user.adapter.out.persistence.mysql.mapper.UserMapper;
 import com.tsinsi.user.application.out.UserPersistencePort;
 import com.tsinsi.user.domain.model.User;
 import org.springframework.cache.annotation.Cacheable;

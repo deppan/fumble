@@ -1,5 +1,6 @@
-package com.tsinsi.user.adapter.out.persistence.mysql;
+package com.tsinsi.user.adapter.out.persistence.mysql.mapper;
 
+import com.tsinsi.user.adapter.out.persistence.mysql.entity.UserEntity;
 import com.tsinsi.user.domain.model.User;
 
 public class UserMapper {
