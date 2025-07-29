@@ -1,4 +1,4 @@
-package com.tsinsi.foundation;
+package com.tsinsi.foundation.configuration;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;

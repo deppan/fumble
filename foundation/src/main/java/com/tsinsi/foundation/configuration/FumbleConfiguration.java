@@ -1,4 +1,4 @@
-package com.tsinsi.foundation;
+package com.tsinsi.foundation.configuration;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;

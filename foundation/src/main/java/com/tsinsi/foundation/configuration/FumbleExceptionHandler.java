@@ -1,5 +1,6 @@
-package com.tsinsi.foundation;
+package com.tsinsi.foundation.configuration;
 
+import com.tsinsi.foundation.shared.AppException;
 import jakarta.annotation.Nonnull;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
@@ -9,27 +10,44 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.ServletWebRequest;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@ControllerAdvice
 @Slf4j
-public class FumbleExceptionHandler extends ResponseEntityExceptionHandler {
+public abstract class FumbleExceptionHandler extends ResponseEntityExceptionHandler {
 
-    private final MessageSource messageSource;
+    protected final MessageSource messageSource;
 
     public FumbleExceptionHandler(MessageSource messageSource) {
         this.messageSource = messageSource;
+    }
+
+    @ExceptionHandler(value = {AppException.class})
+    public ResponseEntity<?> handleAppException(AppException exception, HttpServletRequest request) {
+        log.error(request.getRequestURI(), exception);
+
+        Map<String, Object> map = Map.of("url", request.getRequestURI(), "date", new Date());
+        if (StringUtils.hasLength(exception.getMessageKey())) {
+            try {
+                String message = messageSource.getMessage(exception.getMessageKey(), null, LocaleContextHolder.getLocale());
+                map = new HashMap<>(map);
+                map.put("message", message);
+            } catch (Exception ignored) {
+            }
+        }
+
+        return new ResponseEntity<>(map, exception.getStatus());
     }
 
     @ExceptionHandler(Exception.class)

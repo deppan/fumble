@@ -1,4 +1,4 @@
-package com.tsinsi.foundation;
+package com.tsinsi.foundation.configuration;
 
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
