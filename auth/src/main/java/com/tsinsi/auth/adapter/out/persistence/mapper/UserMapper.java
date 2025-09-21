@@ -1,7 +1,7 @@
 package com.tsinsi.auth.adapter.out.persistence.mapper;
 
 import com.tsinsi.auth.adapter.out.persistence.entity.UserEntity;
-import com.tsinsi.auth.domain.model.User;
+import com.tsinsi.auth.domain.User;
 
 public class UserMapper {
     public static User toUser(UserEntity userEntity) {

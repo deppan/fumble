@@ -1,6 +1,6 @@
 package com.tsinsi.user.adapter.in;
 
-import com.tsinsi.user.application.in.UserUseCase;
+import com.tsinsi.user.application.in.UserService;
 import com.tsinsi.user.application.response.UserResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -17,12 +17,12 @@ import java.util.List;
 @RestController
 public class UserController {
 
-    private final UserUseCase userUseCase;
+    private final UserService userService;
 
     private final Sqids sqids;
 
-    public UserController(UserUseCase userUseCase, Sqids sqids) {
-        this.userUseCase = userUseCase;
+    public UserController(UserService userService, Sqids sqids) {
+        this.userService = userService;
         this.sqids = sqids;
     }
 
@@ -44,12 +44,12 @@ public class UserController {
             }
         }
 
-        return ResponseEntity.ok(userUseCase.findUsers(beforeId, afterId));
+        return ResponseEntity.ok(userService.findUsers(beforeId, afterId));
     }
 
     @GetMapping(value = {"/user/{username}"})
     public ResponseEntity<UserResponse> user(@PathVariable("username") String username) {
-        return ResponseEntity.ok(userUseCase.findOne(username));
+        return ResponseEntity.ok(userService.findOne(username));
     }
 
 }

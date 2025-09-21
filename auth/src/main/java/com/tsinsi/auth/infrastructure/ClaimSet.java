@@ -6,7 +6,7 @@ import lombok.Setter;
 @Setter
 @Getter
 public class ClaimSet {
-    long uid;
-    String username;
-    int days;
+    private long uid;
+    private String username;
+    private int days;
 }

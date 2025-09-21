@@ -1,0 +1,52 @@
+plugins {
+    id 'java'
+    id 'buildlogic.spring-conventions'
+    id 'buildlogic.jose-conventions'
+    id 'org.asciidoctor.jvm.convert' version '4.0.4'
+}
+
+group = 'com.tsinsi.console'
+version = '0.0.1-SNAPSHOT'
+
+ext {
+    snippetsDir = file('build/generated-snippets')
+}
+
+configurations {
+    asciidoctorExt
+}
+
+dependencies {
+    asciidoctorExt 'org.springframework.restdocs:spring-restdocs-asciidoctor'
+
+    implementation project(':foundation')
+
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.casbin:jcasbin:1.84.0'
+    implementation 'org.casbin:jdbc-adapter:2.10.0'
+
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
+    testImplementation 'org.testng:testng:7.10.2'
+}
+
+tasks.named('test') {
+    useTestNG()
+    outputs.dir snippetsDir
+}
+
+tasks.named('asciidoctor') {
+    configurations "asciidoctorExt"
+    inputs.dir snippetsDir
+    dependsOn test
+    baseDirFollowsSourceDir()
+}
+
+bootJar {
+    dependsOn asciidoctor
+
+    from("${asciidoctor.outputDir}") {
+        into 'static/docs'
+    }
+}

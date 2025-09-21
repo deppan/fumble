@@ -1,0 +1,8 @@
+spring:
+  config:
+    import:
+      - optional:classpath:application-dev.yml
+
+logging:
+  level:
+    com.tsinsi.console: DEBUG

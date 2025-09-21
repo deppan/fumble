@@ -1,7 +1,7 @@
 package com.tsinsi.user.application.mapper;
 
 import com.tsinsi.user.application.response.UserResponse;
-import com.tsinsi.user.domain.model.User;
+import com.tsinsi.user.domain.User;
 
 public class UserResponseMapper {
     public static UserResponse toUserResponse(User user) {
